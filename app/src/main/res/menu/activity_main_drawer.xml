@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_button"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_kalender"
+            android:icon="@drawable/ic_kalender_button"
+            android:title="Kalender" />
+        <item
+            android:id="@+id/nav_ilias"
+            android:icon="@drawable/ic_logo_ilias"
+            android:title="Ilias" />
+        <item
+            android:id="@+id/nav_linda"
+            android:icon="@drawable/ic_linda"
+            android:title="Linda" />
+        <item
+            android:id="@+id/nav_forum"
+            android:icon="@drawable/ic_forum"
+            android:title="Forum" />
+        <item
+            android:id="@+id/nav_benachrichtigungen"
+            android:icon="@drawable/ic_benachrichtigungen_button"
+            android:title="Benachrichtigungen" />
+        <item
+            android:id="@+id/nav_tutorials"
+            android:icon="@drawable/ic_tutorials"
+            android:title="Tutorials" />
+        <item
+            android:id="@+id/nav_einstellungen"
+            android:icon="@drawable/ic_einstellungen"
+            android:title="Einstellungen" />
+    </group>
+
+
+</menu>
