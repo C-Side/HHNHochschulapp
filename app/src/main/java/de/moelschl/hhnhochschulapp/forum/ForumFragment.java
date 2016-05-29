@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp;
+package de.moelschl.hhnhochschulapp.forum;
 
 import android.app.Fragment;
 import android.app.ListFragment;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import de.moelschl.hhnhochschulapp.R;
 
 /**
  * Created by moelscmar on 19.05.2016.
@@ -23,7 +25,7 @@ public class ForumFragment extends ListFragment {
 
         this.itemContent = getResources().getStringArray(R.array.topic);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, itemContent);
+        ListAdapter adapter = new ListAdapter(getActivity(), itemContent);
 
         setListAdapter(adapter);
 
