@@ -17,9 +17,10 @@ public class ForumFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        String[] values = new String[] { "Message1", "Message2", "Message3" };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, values);
+        String [] itemContent = getResources().getStringArray(R.array.topic);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, itemContent);
+
         setListAdapter(adapter);
 
         View rootView = inflater.inflate(R.layout.fragment_forum, container, false);
