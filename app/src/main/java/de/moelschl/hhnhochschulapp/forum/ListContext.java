@@ -1,7 +1,9 @@
 package de.moelschl.hhnhochschulapp.forum;
 
+import java.util.ArrayList;
+
 /**
- * a calss which holds information of the forum
+ * a calss which holds the information of the forum
  *
  * Created by Hasbert on 01.06.2016.
  */
@@ -10,6 +12,14 @@ public class ListContext {
     private String title;
     private String description;
     private int imageResId;
+
+    private String subCategorie;
+    private ArrayList<String> subcatList;
+
+    private String comment;
+    private ArrayList<String> commentList;
+
+
 
     public String getDescription() {
         return description;
@@ -34,5 +44,4 @@ public class ListContext {
     public void setImgResId(int imgResId) {
         this.imageResId = imgResId;
     }
-
 }

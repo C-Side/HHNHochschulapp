@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="topic">
-        <item>Organisatorisches</item>
-        <item>Party</item>
-        <item>Raumfindung</item>
+        <topic>Organisatorisches</topic>
+            <string-array name="subtitile">
+                <subcat>blas blubb</subcat>
+                    <string-array name="comments">
+                        <comment>comments 5</comment>
+                        <comment>comments: 3</comment>
+                        <comment>comments: 0</comment>
+                    </string-array>
+                <item>test: 3</item>
+                <item>daten</item>
+             </string-array>
+        <topic>Party</topic>
+        <topic>Raumfindung</topic>
     </string-array>
 
     <string-array name="description">
-        <item>Beiträge: 5</item>
-        <item>Beiträge: 3</item>
-        <item>Beiträge: 0</item>
+        <item>Unterkategorien: 5</item>
+        <item>Unterkategorien: 3</item>
+        <item>Unterkategorien: 0</item>
+    </string-array>
+
+
+
+    <string-array name="comments">
+        <item>comments 5</item>
+        <item>comments: 3</item>
+        <item>comments: 0</item>
     </string-array>
 </resources>
