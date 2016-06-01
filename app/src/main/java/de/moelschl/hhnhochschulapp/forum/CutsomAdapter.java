@@ -64,6 +64,7 @@ public class CutsomAdapter extends BaseAdapter {
         return convertView;
     }
 
+
     private class MyViewHolder {
         TextView topicTitle, topicDesc;
         ImageView icon;
@@ -73,5 +74,11 @@ public class CutsomAdapter extends BaseAdapter {
             topicDesc = (TextView) item.findViewById(R.id.topicDesc);
             icon = (ImageView) item.findViewById(R.id.goIcon);
         }
+    }
+
+    public void loadSubCategorys(ArrayList<ListContext> newList){
+        myList.clear();
+        myList = newList;
+        notifyDataSetChanged();
     }
 }

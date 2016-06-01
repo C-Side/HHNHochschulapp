@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.res.XmlResourceParser;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import org.xml.sax.helpers.XMLReaderFactory;
 
 import java.util.ArrayList;
 
@@ -26,15 +29,24 @@ public class ForumFragment extends ListFragment {
     private String [] title;
     private String [] desc;
     private int image;
-
     private ArrayList<ListContext> myList = new ArrayList<>();
+
+    private String[] subtitle;
+    private String[] comments;
+    private ArrayList<ListContext> mySubList = new ArrayList<>();
+
+    private CutsomAdapter cutsomAdapter;
+
+
+
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         getDataInList();
-        CutsomAdapter cutsomAdapter = new CutsomAdapter(getActivity(), myList);
+        this.cutsomAdapter = new CutsomAdapter(getActivity(), myList);
         setListAdapter(cutsomAdapter);
 
 
@@ -44,8 +56,10 @@ public class ForumFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        String childname = myList.get(position).getTitle();
-        Toast.makeText(getActivity(),childname, Toast.LENGTH_LONG).show();
+        getDataInSubList(position);
+        cutsomAdapter.loadSubCategorys(mySubList);
+        //String childname = mySubList.get(position).getTitle();
+        //Toast.makeText(getActivity(),childname, Toast.LENGTH_LONG).show();
     }
 
 
@@ -60,8 +74,28 @@ public class ForumFragment extends ListFragment {
             listData.setTitle(title[i]);
             listData.setDescription(desc[i]);
             listData.setImgResId(image);
+
             // Add this object into the ArrayList myList
             myList.add(listData);
+        }
+    }
+
+    private void getDataInSubList(int position){
+        this.subtitle =  getResources().getStringArray(R.array.subtitile);
+        this.comments =  getResources().getStringArray(R.array.comments);
+        this.image = R.drawable.goimage;
+
+        int posOfParent = position;
+
+        for (int i = 0; i < subtitle.length; i++) {
+            // Create a new object for each list item
+            ListContext listData = new ListContext();
+            listData.setTitle(subtitle[i]);
+            listData.setDescription(comments[i]);
+            listData.setImgResId(image);
+
+            // Add this object into the ArrayList myList
+            mySubList.add(listData);
         }
     }
 }
