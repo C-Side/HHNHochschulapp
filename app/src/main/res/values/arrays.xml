@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="topic">
-        <item>hans</item>
-        <item>mag</item>
-        <item>blumen</item>
+        <item>Organisatorisches</item>
+        <item>Party</item>
+        <item>Raumfindung</item>
+    </string-array>
+
+    <string-array name="description">
+        <item>Beiträge: 5</item>
+        <item>Beiträge: 3</item>
+        <item>Beiträge: 0</item>
     </string-array>
 </resources>
