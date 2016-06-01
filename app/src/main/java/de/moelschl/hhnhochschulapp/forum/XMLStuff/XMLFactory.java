@@ -8,9 +8,6 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import model.Card;
 
 /**
  * the factory creats the cards out of the xml file
@@ -26,42 +23,45 @@ public class XMLFactory {
     /**
      * creates the cards out of the xml File
      */
-    public static void createCards() {
+    public static void createTopic() {
 
       //  Card.getAllCards().clear();
 
         try {
             // read the information into a jdom file
             Document XMLDoc = new SAXBuilder().build(xmlTopics);
-            // get the root Element (<topic>)
+            // get the root Element (<resources>)
             Element root = XMLDoc.getRootElement();
-            // put the Cards into a list (<Card>)
-            List<Element> cards = root.getChildren("Card");
+            // put the topics into a list (<topic>)
+            List<Element> topics = root.getChildren("topic");
+            //put the subtopics into a list (<subcat>)
+            List<Element> subcategories = root.getChildren("subcat");
+            //put the subtopics into a list (<subcat>)
+            List<Element> comments = root.getChildren("comment");
+
+
             // create the Cards
-            for (Element card : cards) {
+            for (Element topic : topics) {
                 // data variables
-                int id = 0;
-                String category = null;
-                String subCategory = null;
-                String level = null;
-                String question = null;
-                String answer = null;
-                int asked = 0;
-                int known = 0;
+                String title = null;
+                String description =  null;
 
-                // read data for fields
-                id = Integer.parseInt(card.getChildText("ID"));
-                category = card.getChildText("category");
-                subCategory = card.getChildText("subCategory");
-                level = card.getChildText("level");
-                question = card.getChildText("question");
-                answer = card.getChildText("answer");
-                asked = Integer.parseInt(card.getChildText("asked"));
-                known = Integer.parseInt(card.getChildText("known"));
+                title = topic.getChildText("topic");
+                description = topic.getChildText("description");
 
-                Card.createCard(id, category, subCategory, level, question, answer, asked, known);
-
+                System.out.println(title +" " + description);
+                for (Element subcat :subcategories) {
+                    String subCategorie = null;
+                    subCategorie = subcat.getChildText("subcat");
+                    System.out.println(subCategorie);
+                    for (Element comment :comments) {
+                        String userText = null;
+                        userText = comment.getChildText("comment");
+                        System.out.println(userText);
+                    }
+                }
             }
+                //Card.createCard(id, category, subCategory, level, question, answer, asked, known);
         } catch (JDOMException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -71,7 +71,7 @@ public class XMLFactory {
 
     /**
      * loads the levels out of a xml file
-     */
+
     public static ObservableList<String> loadLevels() {
 
         ObservableList<String> listOfLevels = FXCollections.observableArrayList();
@@ -100,7 +100,7 @@ public class XMLFactory {
 
     /**
      * loads the categories out of a xml file
-     */
+
     public static ObservableList<String> loadCategories() {
 
         ObservableList<String> listOfCategories = FXCollections.observableArrayList();
@@ -134,7 +134,7 @@ public class XMLFactory {
 
     /**
      * loads the subCategories out of a xml file
-     */
+
     public static ObservableList<String> loadSubCategories(String categoryPar) {
 
         ObservableList<String> listOfSubCategories = FXCollections.observableArrayList();
@@ -165,4 +165,5 @@ public class XMLFactory {
         }
         return listOfSubCategories;
     }
+    */
 }

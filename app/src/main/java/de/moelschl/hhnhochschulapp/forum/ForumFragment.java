@@ -81,7 +81,7 @@ public class ForumFragment extends ListFragment {
     }
 
     private void getDataInSubList(int position){
-        this.subtitle =  getResources().getStringArray(R.array.subtitile);
+        this.subtitle =  getResources().getStringArray(R.array.subtitle);
         this.comments =  getResources().getStringArray(R.array.comments);
         this.image = R.drawable.goimage;
 
