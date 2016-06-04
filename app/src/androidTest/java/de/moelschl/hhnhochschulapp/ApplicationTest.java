@@ -15,6 +15,12 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
     @MediumTest
     public void testXMLFactory(){
-        XMLFactory.createTopic();
+        XMLFactory xmlFactory = new XMLFactory();
+        try {
+            xmlFactory.createTopic();
+        }
+        catch (Exception exeption){
+            exeption.printStackTrace();
+        }
     }
 }

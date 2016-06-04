@@ -18,12 +18,12 @@ import org.jdom2.input.SAXBuilder;
  */
 public class XMLFactory {
 
-    private static final String xmlTopics = "res/arrays.xml";
+    private  final String xmlTopics = "E:\\Proging\\ProgProjects\\InterfaceProjects\\HHNHochschulapp\\app\\src\\main\\res\\xml\\forum_info.xml";
 
     /**
      * creates the cards out of the xml File
      */
-    public static void createTopic() {
+    public  void createTopic() {
 
       //  Card.getAllCards().clear();
 
