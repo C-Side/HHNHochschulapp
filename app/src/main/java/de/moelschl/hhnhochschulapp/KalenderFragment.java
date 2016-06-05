@@ -1,22 +1,36 @@
 package de.moelschl.hhnhochschulapp;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.CalendarView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
- * Created by moelscmar on 19.05.2016.
+ * Created by ahenning on 31.05.2016.
  */
-public class KalenderFragment extends Fragment {
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+public class KalenderFragment extends AppCompatActivity {
 
-        View rootView = inflater.inflate(R.layout.fragment_kalender, container, false);
-        return rootView;
+    CalendarView calendarView;
+    TextView dateDisplay;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_kalender);
+
+        calendarView = (CalendarView) findViewById(R.id.calendarView);
+        dateDisplay = (TextView) findViewById(R.id.date_display);
+        dateDisplay.setText("Date: ");
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
+                dateDisplay.setText("Date: " + i2 + " / " + i1 + " / " + i);
+
+                Toast.makeText(getApplicationContext(), "Selected Date:\n" + "Day = " + i2 + "\n" + "Month = " + i1 + "\n" + "Year = " + i, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
-
+}
