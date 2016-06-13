@@ -17,12 +17,12 @@ import de.moelschl.hhnhochschulapp.R;
  */
 public class CutsomAdapter extends BaseAdapter {
 
-    private ArrayList<ListContext> myList = new ArrayList<>();
+    private ArrayList<Theme> myList = new ArrayList<>();
     private LayoutInflater inflater;
     private Context context;
 
 
-    public CutsomAdapter(Context context, ArrayList<ListContext> myList) {
+    public CutsomAdapter(Context context, ArrayList<Theme> myList) {
         this.myList = myList;
         this.context = context;
         inflater = LayoutInflater.from(this.context);
@@ -34,7 +34,7 @@ public class CutsomAdapter extends BaseAdapter {
     }
 
     @Override
-    public ListContext getItem(int position) {
+    public Theme getItem(int position) {
         return myList.get(position);
     }
 
@@ -55,11 +55,11 @@ public class CutsomAdapter extends BaseAdapter {
             mViewHolder = (MyViewHolder) convertView.getTag();
         }
 
-        ListContext currentListData = getItem(position);
+        Theme currentListData = getItem(position);
 
         mViewHolder.topicTitle.setText(currentListData.getTitle());
         mViewHolder.topicDesc.setText(currentListData.getDescription());
-        mViewHolder.icon.setImageResource(currentListData.getImgResId());
+        //mViewHolder.icon.setImageResource(currentListData.getImgResId());
 
         return convertView;
     }
@@ -76,9 +76,12 @@ public class CutsomAdapter extends BaseAdapter {
         }
     }
 
-    public void loadSubCategorys(ArrayList<ListContext> newList){
-        myList.clear();
-        myList = newList;
+    public void loadSubCategorys(ArrayList<SubTheme> newList){
+        //myList.clear();
+        System.out.println(newList);
+        for (SubTheme sub: newList){
+            System.out.println(sub.getSubTitle());
+        }
         notifyDataSetChanged();
     }
 }

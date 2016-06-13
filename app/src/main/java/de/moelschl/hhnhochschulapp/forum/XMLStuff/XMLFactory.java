@@ -1,12 +1,22 @@
 package de.moelschl.hhnhochschulapp.forum.XMLStuff;
 
+import android.content.Context;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+
+import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.forum.SubTheme;
+import de.moelschl.hhnhochschulapp.forum.Theme;
 
 
 /**
@@ -18,49 +28,58 @@ import org.jdom2.input.SAXBuilder;
  */
 public class XMLFactory {
 
-    private  final String xmlTopics = "E:\\Proging\\ProgProjects\\InterfaceProjects\\HHNHochschulapp\\app\\src\\main\\res\\xml\\forum_info.xml";
+    public XMLFactory(){
+
+    }
 
     /**
-     * creates the cards out of the xml File
+     * creates a List of Listcontexts which are the information for the Forum
+     * @param contextIn the context of the shown window
      */
-    public  void createTopic() {
+
+    public static void createTopic(Context contextIn) {
 
       //  Card.getAllCards().clear();
 
         try {
+            InputStream is = contextIn.getResources().openRawResource(R.raw.forum_information);
+
             // read the information into a jdom file
-            Document XMLDoc = new SAXBuilder().build(xmlTopics);
-            // get the root Element (<resources>)
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            // read the information into a jdom file
+            Document XMLDoc = new SAXBuilder().build(br);
+            // get the root Element (<forumtopic>)
             Element root = XMLDoc.getRootElement();
             // put the topics into a list (<topic>)
             List<Element> topics = root.getChildren("topic");
-            //put the subtopics into a list (<subcat>)
-            List<Element> subcategories = root.getChildren("subcat");
-            //put the subtopics into a list (<subcat>)
-            List<Element> comments = root.getChildren("comment");
 
-
-            // create the Cards
             for (Element topic : topics) {
-                // data variables
-                String title = null;
-                String description =  null;
+                String title = topic.getChildText("topName");
+                String description = topic.getChildText("description");
 
-                title = topic.getChildText("topic");
-                description = topic.getChildText("description");
+                Theme myTheme = new Theme(title, description);
 
-                System.out.println(title +" " + description);
-                for (Element subcat :subcategories) {
-                    String subCategorie = null;
-                    subCategorie = subcat.getChildText("subcat");
-                    System.out.println(subCategorie);
+                List<Element> subcategory = topic.getChildren("subcat"); //put the subtopics into a list (<subcat>)
+
+                for(Element subcat: subcategory){
+                    String subTitle = subcat.getChildText("subName");
+
+                    SubTheme mySubTheme = myTheme.createSubTheme(subTitle);
+                    System.out.println(subTitle);
+                    List<Element> comments = subcat.getChildren("comment");
+
                     for (Element comment :comments) {
-                        String userText = null;
-                        userText = comment.getChildText("comment");
-                        System.out.println(userText);
+                        String header = comment.getChildText("header");
+                        String author = comment.getChildText("author");
+                        String text = comment.getChildText("text");
+
+                        mySubTheme.createComment(header, author, text);
+
+                        System.out.println(header+ " " + author + " " + text);
                     }
                 }
             }
+
                 //Card.createCard(id, category, subCategory, level, question, answer, asked, known);
         } catch (JDOMException e) {
             e.printStackTrace();
@@ -68,102 +87,4 @@ public class XMLFactory {
             e.printStackTrace();
         }
     }
-
-    /**
-     * loads the levels out of a xml file
-
-    public static ObservableList<String> loadLevels() {
-
-        ObservableList<String> listOfLevels = FXCollections.observableArrayList();
-
-        try {
-            // read the information into a jdom file
-            Document XMLDoc = new SAXBuilder().build(xmlLevels);
-            // get the root Element (<Level>)
-            Element root = XMLDoc.getRootElement();
-            // put the Levels into a list
-            List<Element> levels = root.getChildren();
-            // create the Levels
-            for (Element level : levels) {
-
-                //add the Levels to the list
-                listOfLevels.add(level.getText());
-            }
-
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return listOfLevels;
-    }
-
-    /**
-     * loads the categories out of a xml file
-
-    public static ObservableList<String> loadCategories() {
-
-        ObservableList<String> listOfCategories = FXCollections.observableArrayList();
-
-        try {
-            // read the information into a jdom file
-            Document XMLDoc = new SAXBuilder().build(xmlCategories);
-            // get the root Element (<Categories>)
-            Element root = XMLDoc.getRootElement();
-            // put the categories into a list
-            List<Element> categories = root.getChildren("cat");
-            // create the categories
-            for (Element category : categories) {
-                //initialize fields
-                String name = null;
-
-                //read the data into the fields
-                name = category.getChildText("name");
-
-                //add the categories to the list
-                listOfCategories.add(name);
-            }
-
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return listOfCategories;
-    }
-
-    /**
-     * loads the subCategories out of a xml file
-
-    public static ObservableList<String> loadSubCategories(String categoryPar) {
-
-        ObservableList<String> listOfSubCategories = FXCollections.observableArrayList();
-
-        try {
-            // read the information into a jdom file
-            Document XMLDoc = new SAXBuilder().build(xmlCategories);
-            // get the root Element (<categories>)
-            Element root = XMLDoc.getRootElement();
-            // put the categories into a list
-            List<Element> categories = root.getChildren();
-
-            //load the subCategories
-            for (Element category : categories) {
-                if (category.getChildText("name").equals(categoryPar)) {
-                    List<Element> subCategories = category.getChildren("subCat");
-                    //add the subCategories to the list
-                    for (Element subCat: subCategories) {
-                        listOfSubCategories.add(subCat.getText());
-                    }
-                }
-            }
-
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return listOfSubCategories;
-    }
-    */
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<forumtopics>
+    <topic>
+        <topName>Organisatorisches</topName>
+        <description> jajajaja</description>
+            <subcat>
+                <subName> blas blubb</subName>
+                    <comment>
+                        <header>comments 3</header>
+                        <author>comments: 3</author>
+                        <text>fdgst</text>
+                    </comment>
+                <comment>pkasbdkasf</comment>
+            </subcat>
+
+            <subcat>
+                <subName>LKJIDFBSDF</subName>
+                <comment>comments 5</comment>
+                <comment>dfdfg: 3</comment>
+             <comment>comments: 0</comment>
+            </subcat>
+
+            <subcat>
+                <subName>daten</subName>
+            </subcat>
+    </topic>
+
+    <topic>
+        <topName>drecks</topName>
+        <description>blalallsfk</description>
+    </topic>
+
+    <topic>
+        <topName>zeug</topName>
+        <description>trololo</description>
+    </topic>
+
+</forumtopics>
