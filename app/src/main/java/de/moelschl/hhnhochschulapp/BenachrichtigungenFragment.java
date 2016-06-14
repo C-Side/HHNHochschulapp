@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -31,5 +32,16 @@ public class BenachrichtigungenFragment extends Fragment {
         ListAdapter messageAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, messages);
         ListView myListView = (ListView) myFragmentView.findViewById(R.id.listView1);
         myListView.setAdapter(messageAdapter);
+
+        myListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener(){
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        android.app.FragmentManager fm = getFragmentManager();
+                        fm.beginTransaction().replace(R.id.content_frame, new NachrichtFragment()).commit();
+                    }
+                }
+        );
     }
 }

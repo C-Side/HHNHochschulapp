@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="Von:"
+            android:id="@+id/absender"
+            android:textColor="#000000"
+            android:textSize="14dp"
+            android:padding="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Absender"
+            android:id="@+id/absender2"
+            android:textColor="#000000"
+            android:textSize="14dp"
+            android:padding="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="Datum:"
+            android:id="@+id/datum"
+            android:textColor="#000000"
+            android:textSize="14dp"
+            android:padding="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14.06.2016"
+            android:id="@+id/datum2"
+            android:textColor="#000000"
+            android:textSize="14dp"
+            android:padding="20dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="New Text"
+        android:id="@+id/nachrichtenText"
+        android:padding="20dp"
+        android:textColor="#000000" />
+
+</LinearLayout>
