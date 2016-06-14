@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp.forum;
+package de.moelschl.hhnhochschulapp.forum.model;
 
 /**
  * Created by Hasbert on 13.06.2016.

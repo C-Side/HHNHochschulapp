@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.forum.XMLStuff.XMLFactory;
+import de.moelschl.hhnhochschulapp.forum.model.Theme;
 
 /**
  * Created by moelscmar on 19.05.2016.
@@ -29,9 +30,6 @@ public class ForumFragment extends ListFragment {
     private CutsomAdapter cutsomAdapter;
 
     private Context context;
-
-
-
 
 
     @Nullable

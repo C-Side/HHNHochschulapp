@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp.forum;
+package de.moelschl.hhnhochschulapp.forum.model;
 
 import java.util.ArrayList;
 

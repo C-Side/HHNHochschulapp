@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.forum.model.SubTheme;
+import de.moelschl.hhnhochschulapp.forum.model.Theme;
 
 /**
  * Created by Hasbert on 01.06.2016.

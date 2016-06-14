@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -15,8 +14,8 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.forum.SubTheme;
-import de.moelschl.hhnhochschulapp.forum.Theme;
+import de.moelschl.hhnhochschulapp.forum.model.SubTheme;
+import de.moelschl.hhnhochschulapp.forum.model.Theme;
 
 
 /**
