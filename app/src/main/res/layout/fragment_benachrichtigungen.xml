@@ -9,4 +9,11 @@
         android:text="Benachrichtigungen"
         android:id="@+id/placeholder"
         android:layout_gravity="center" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView1"
+        android:layout_gravity="center_horizontal|top"
+        android:choiceMode="singleChoice" />
 </FrameLayout>
