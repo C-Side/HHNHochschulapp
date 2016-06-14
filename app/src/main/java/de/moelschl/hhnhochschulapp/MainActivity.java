@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         fm.beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 
         setAllImageListeners();
-        SQLConnection sqlConnection = new SQLConnection();
+     
 
 
     }
