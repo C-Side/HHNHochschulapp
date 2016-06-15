@@ -1,6 +1,5 @@
 package de.moelschl.hhnhochschulapp.forum;
 
-import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ public class ForumFragment extends ListFragment {
 
     private XMLFactory xmlFactory;
 
-    private CutsomAdapter cutsomAdapter;
+    private CustomAdapter customAdapter;
 
     private Context context;
 
@@ -35,8 +34,8 @@ public class ForumFragment extends ListFragment {
         //getDataInList();
         xmlFactory = new XMLFactory();
         //testXML();
-        this.cutsomAdapter = new CutsomAdapter(getActivity(), xmlFactory.createTopic(context)); //!!!!
-        setListAdapter(cutsomAdapter);
+        this.customAdapter = new CustomAdapter(getActivity(), xmlFactory.createTopic(context)); //!!!!
+        setListAdapter(customAdapter);
 
 
         View rootView = inflater.inflate(R.layout.fragment_forum, container, false);
@@ -50,17 +49,8 @@ public class ForumFragment extends ListFragment {
         ForumListItem listItem = (ForumListItem) l.getAdapter().getItem(position);
         ArrayList<ForumListItem> nextList = xmlFactory.getSubListByParent(listItem.getTitle());
 
-        cutsomAdapter.loadSubCategorys(nextList);
-        FragmentTransaction ft = getFragmentManager().popBackStack();
+        customAdapter.loadSubCategorys(nextList);
     }
-
-
-
-    @Override
-    public void onSwipeRight(){
-
-    }
-
 
     public void testXML(){
         this.xmlFactory = new XMLFactory();

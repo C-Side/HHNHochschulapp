@@ -16,14 +16,14 @@ import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
 /**
  * Created by Hasbert on 01.06.2016.
  */
-public class CutsomAdapter extends BaseAdapter {
+public class CustomAdapter extends BaseAdapter {
 
-    private ArrayList<ForumListItem> myList = new ArrayList<>();
+    private ArrayList<ForumListItem> myList;
     private LayoutInflater inflater;
     private Context context;
 
 
-    public CutsomAdapter(Context context, ArrayList<ForumListItem> listItem) {
+    public CustomAdapter(Context context, ArrayList<ForumListItem> listItem) {
         this.myList = listItem;
         this.context = context;
         inflater = LayoutInflater.from(this.context);
@@ -56,10 +56,10 @@ public class CutsomAdapter extends BaseAdapter {
             mViewHolder = (MyViewHolder) convertView.getTag();
         }
 
-        ForumListItem currentListData = getItem(position);
+        ForumListItem listItem = getItem(position);
 
-        mViewHolder.topicTitle.setText(currentListData.getTitle());
-        mViewHolder.topicDesc.setText(currentListData.getDescription());
+        mViewHolder.topicTitle.setText(listItem.getTitle());
+        mViewHolder.topicDesc.setText(listItem.getDescription());
         //mViewHolder.icon.setImageResource(currentListData.getImgResId());
 
         return convertView;
@@ -78,7 +78,6 @@ public class CutsomAdapter extends BaseAdapter {
     }
 
     public void loadSubCategorys(ArrayList<ForumListItem> newList){
-
         myList.clear();
         myList = newList;
         notifyDataSetChanged();
