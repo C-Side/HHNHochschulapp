@@ -5,6 +5,7 @@
         <description> jajajaja</description>
             <subcat>
                 <subName> blas blubb</subName>
+
                     <comment>
                         <header>comments 3</header>
                         <author>comments: 3</author>
@@ -12,7 +13,6 @@
                     </comment>
                 <comment>pkasbdkasf</comment>
             </subcat>
-
             <subcat>
                 <subName>LKJIDFBSDF</subName>
                 <comment>comments 5</comment>
@@ -28,6 +28,9 @@
     <topic>
         <topName>drecks</topName>
         <description>blalallsfk</description>
+            <subcat>
+                 <subName>LKJIDFBSDF</subName>
+            </subcat>
     </topic>
 
     <topic>

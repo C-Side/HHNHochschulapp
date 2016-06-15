@@ -12,8 +12,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
-import de.moelschl.hhnhochschulapp.forum.model.SubTheme;
-import de.moelschl.hhnhochschulapp.forum.model.Theme;
 
 /**
  * Created by Hasbert on 01.06.2016.
@@ -79,12 +77,10 @@ public class CutsomAdapter extends BaseAdapter {
         }
     }
 
-    public void loadSubCategorys(ArrayList<SubTheme> newList){
-        //myList.clear();
-        System.out.println(newList);
-        for (SubTheme sub: newList){
-            System.out.println(sub.getSubTitle());
-        }
+    public void loadSubCategorys(ArrayList<ForumListItem> newList){
+
+        myList.clear();
+        myList = newList;
         notifyDataSetChanged();
     }
 }

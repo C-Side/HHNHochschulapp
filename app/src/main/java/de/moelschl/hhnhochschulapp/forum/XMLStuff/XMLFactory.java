@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -14,8 +16,7 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.forum.model.SubTheme;
-import de.moelschl.hhnhochschulapp.forum.model.Theme;
+import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
 
 
 /**
@@ -27,6 +28,10 @@ import de.moelschl.hhnhochschulapp.forum.model.Theme;
  */
 public class XMLFactory {
 
+    private List<Element> topics;
+    private List<Element> subTopics;
+    private List<Element> comment;
+
     public XMLFactory(){
 
     }
@@ -36,54 +41,90 @@ public class XMLFactory {
      * @param contextIn the context of the shown window
      */
 
-    public static void createTopic(Context contextIn) {
+    public ArrayList<ForumListItem> createTopic(Context contextIn) {
 
-      //  Card.getAllCards().clear();
+        ArrayList<ForumListItem> themelist = new ArrayList<>();
+        //  Card.getAllCards().clear();
 
-        try {
-            InputStream is = contextIn.getResources().openRawResource(R.raw.forum_information);
-
-            // read the information into a jdom file
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            // read the information into a jdom file
-            Document XMLDoc = new SAXBuilder().build(br);
-            // get the root Element (<forumtopic>)
-            Element root = XMLDoc.getRootElement();
+            Element root = buildRootElement(contextIn);
             // put the topics into a list (<topic>)
-            List<Element> topics = root.getChildren("topic");
+            this.topics = root.getChildren("topic");
 
             for (Element topic : topics) {
                 String title = topic.getChildText("topName");
                 String description = topic.getChildText("description");
 
-                Theme myTheme = new Theme(title, description);
+                ForumListItem listItem = new ForumListItem(title, description);
+                themelist.add(listItem);
+            }
 
-                List<Element> subcategory = topic.getChildren("subcat"); //put the subtopics into a list (<subcat>)
+        return themelist;
+    }
 
-                for(Element subcat: subcategory){
-                    String subTitle = subcat.getChildText("subName");
+    public ArrayList<ForumListItem> getSubListByParent (String parentname){
 
-                    SubTheme mySubTheme = myTheme.createSubTheme(subTitle);
-                    System.out.println(subTitle);
-                    List<Element> comments = subcat.getChildren("comment");
+        ArrayList<ForumListItem> subThemeList = new ArrayList<>();
 
-                    for (Element comment :comments) {
-                        String header = comment.getChildText("header");
-                        String author = comment.getChildText("author");
-                        String text = comment.getChildText("text");
+            for (Element theme: topics){
+                if (parentname.equals(theme.getChild("topName").getText())){
 
-                        mySubTheme.createComment(header, author, text);
+                    this.subTopics = theme.getChildren("subcat");
 
-                        System.out.println(header+ " " + author + " " + text);
+                    for (Element subtheme: subTopics){
+                        String subTitle = subtheme.getChildText("subName");
+                        String description = "default desc";
+
+                        ForumListItem listItem = new ForumListItem(subTitle, description);
+                        subThemeList.add(listItem);
+
+                        System.out.println("--- subtheme -- " +parentname + " + " + subTitle);
                     }
                 }
             }
 
-                //Card.createCard(id, category, subCategory, level, question, answer, asked, known);
+        return subThemeList;
+    }
+
+    public ArrayList<ForumListItem> getCommentListByParent (String parentname){
+
+        ArrayList<ForumListItem> commentList = new ArrayList<>();
+
+        for (Element subTheme: subTopics){
+            if (parentname.equals(subTheme.getChild("subName").getText())){
+
+                this.comment = subTheme.getChildren("comment");
+
+                for (Element com: comment){
+                    String header = com.getChildText("header");
+                    String author = com.getChildText("author");
+                    //String description = "default desc";
+
+                    ForumListItem listItem = new ForumListItem(header, author);
+                    commentList.add(listItem);
+                    //this.subthemeList.put(parentname, listItem);
+                    //SubTheme mySubTheme = myTheme.createSubTheme(subTitle);
+                }
+            }
+        }
+        return commentList;
+    }
+
+    private Element buildRootElement(Context contextIn){
+        Element root = null;
+        try {
+            InputStream path = contextIn.getResources().openRawResource(R.raw.forum_information);
+
+            // read the information into a jdom file
+            BufferedReader br = new BufferedReader(new InputStreamReader(path));
+            // building a document to get the root from
+            Document XMLDoc = new SAXBuilder().build(br);
+            // get the root Element (<forumtopic>)
+            root = XMLDoc.getRootElement();
         } catch (JDOMException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return root;
     }
 }
