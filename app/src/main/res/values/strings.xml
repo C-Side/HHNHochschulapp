@@ -3,7 +3,10 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="datum"></string>
+    <string name="betreff"></string>
+    <string name="absender"></string>
+    <string name="nachricht"></string>
     <string name="action_logout">Logout</string>
     <string name="title_activity_login">LoginActivity</string>
 </resources>

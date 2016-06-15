@@ -1,6 +1,7 @@
 package de.moelschl.hhnhochschulapp;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
@@ -36,8 +37,8 @@ import java.util.regex.Pattern;
 public class BenachrichtigungenFragment extends Fragment {
     InputStream is;
     String[] results;
+    public static String auswahl;
 
-    JSONObject json_data;
     private View myFragmentView;
 
     @Nullable
@@ -53,7 +54,6 @@ public class BenachrichtigungenFragment extends Fragment {
     }
 
     private void init() {
-        String[] messages = {"Doneit: SV2 Ergebnisse", "System: Hochwasser", "System: Parkplatz geschlossen"};
         ListAdapter messageAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, results);
         ListView myListView = (ListView) myFragmentView.findViewById(R.id.listView1);
         myListView.setAdapter(messageAdapter);
@@ -63,8 +63,9 @@ public class BenachrichtigungenFragment extends Fragment {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        android.app.FragmentManager fm = getFragmentManager();
-                        fm.beginTransaction().replace(R.id.content_frame, new NachrichtFragment()).commit();
+                        auswahl = String.valueOf(parent.getItemAtPosition(position));
+                        Intent intent = new Intent(getActivity(), NachrichtActivity.class);
+                        startActivity(intent);
                     }
                 }
         );
@@ -102,7 +103,9 @@ public class BenachrichtigungenFragment extends Fragment {
 
             }
 
-
+         public static String getAuswahl() {
+            return auswahl;
+        }
 
     }
 
