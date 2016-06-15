@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
 import de.moelschl.hhnhochschulapp.forum.model.SubTheme;
 import de.moelschl.hhnhochschulapp.forum.model.Theme;
 
@@ -19,13 +20,13 @@ import de.moelschl.hhnhochschulapp.forum.model.Theme;
  */
 public class CutsomAdapter extends BaseAdapter {
 
-    private ArrayList<Theme> myList = new ArrayList<>();
+    private ArrayList<ForumListItem> myList = new ArrayList<>();
     private LayoutInflater inflater;
     private Context context;
 
 
-    public CutsomAdapter(Context context, ArrayList<Theme> myList) {
-        this.myList = myList;
+    public CutsomAdapter(Context context, ArrayList<ForumListItem> listItem) {
+        this.myList = listItem;
         this.context = context;
         inflater = LayoutInflater.from(this.context);
     }
@@ -36,7 +37,7 @@ public class CutsomAdapter extends BaseAdapter {
     }
 
     @Override
-    public Theme getItem(int position) {
+    public ForumListItem getItem(int position) {
         return myList.get(position);
     }
 
@@ -57,7 +58,7 @@ public class CutsomAdapter extends BaseAdapter {
             mViewHolder = (MyViewHolder) convertView.getTag();
         }
 
-        Theme currentListData = getItem(position);
+        ForumListItem currentListData = getItem(position);
 
         mViewHolder.topicTitle.setText(currentListData.getTitle());
         mViewHolder.topicDesc.setText(currentListData.getDescription());

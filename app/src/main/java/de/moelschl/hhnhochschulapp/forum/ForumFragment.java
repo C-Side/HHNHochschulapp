@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.forum.XMLStuff.XMLFactory;
+import de.moelschl.hhnhochschulapp.forum.model.SubTheme;
 import de.moelschl.hhnhochschulapp.forum.model.Theme;
 
 /**
@@ -38,7 +39,7 @@ public class ForumFragment extends ListFragment {
         this.context = getContext();
         //getDataInList();
         testXML();
-        this.cutsomAdapter = new CutsomAdapter(getActivity(), Theme.getThemeList()); //!!!!
+        this.cutsomAdapter = new CutsomAdapter(getActivity(), Theme.getConvertedThemeList()); //!!!!
         setListAdapter(cutsomAdapter);
 
 
@@ -49,6 +50,10 @@ public class ForumFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+        if(clickedItem.isInstanceOf(SubTheme)){
+            loadSubInfoList;
+        }
+
         Theme pulledTheme = (Theme) l.getAdapter().getItem(position);
 
         cutsomAdapter.loadSubCategorys(pulledTheme.getSubThemeList());

@@ -44,6 +44,17 @@ public class Theme {
         return subThemeList;
     }
 
+    public ArrayList<ForumListItem> getConvertedThemeList(){
+        ArrayList<ForumListItem> convertedList = new ArrayList<>();
+        for (Theme theme:  themeList){
+            ForumListItem listItem
+
+            theme.getTitle()
+        }
+
+        return convertedList;
+    }
+
     /**
      * getter for description
      * @return the theme description
