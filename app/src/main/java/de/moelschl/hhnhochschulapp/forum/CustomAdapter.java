@@ -77,7 +77,7 @@ public class CustomAdapter extends BaseAdapter {
         }
     }
 
-    public void loadSubCategorys(ArrayList<ForumListItem> newList){
+    public void loadNewData(ArrayList<ForumListItem> newList){
         myList.clear();
         myList = newList;
         notifyDataSetChanged();
