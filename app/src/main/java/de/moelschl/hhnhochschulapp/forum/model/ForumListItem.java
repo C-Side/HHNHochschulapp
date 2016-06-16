@@ -8,10 +8,12 @@ public class ForumListItem {
 
     private String title;
     private String description;
+    private String iAmA;
 
-    public ForumListItem(String title, String description){
+    public ForumListItem(String title, String description, String iAmA){
         this.title = title;
         this.description = description;
+        this.iAmA = iAmA;
     }
 
     public String getTitle() {
@@ -20,5 +22,9 @@ public class ForumListItem {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getListHirarchie() {
+        return iAmA;
     }
 }

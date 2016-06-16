@@ -53,8 +53,9 @@ public class XMLFactory {
             for (Element topic : topics) {
                 String title = topic.getChildText("topName");
                 String description = topic.getChildText("description");
+                String type = topic.getChildText("iAmA");
 
-                ForumListItem listItem = new ForumListItem(title, description);
+                ForumListItem listItem = new ForumListItem(title, description,type);
                 themelist.add(listItem);
             }
 
@@ -73,8 +74,9 @@ public class XMLFactory {
                     for (Element subtheme: subTopics){
                         String subTitle = subtheme.getChildText("subName");
                         String description = "default desc";
+                        String type = subtheme.getChildText("iAmA");
 
-                        ForumListItem listItem = new ForumListItem(subTitle, description);
+                        ForumListItem listItem = new ForumListItem(subTitle, description, type);
                         subThemeList.add(listItem);
 
                         System.out.println("--- subtheme -- " +parentname + " + " + subTitle);
@@ -97,9 +99,10 @@ public class XMLFactory {
                 for (Element com: comment){
                     String header = com.getChildText("header");
                     String author = com.getChildText("author");
+                    String type = com.getChildText("iAmA");
                     //String description = "default desc";
 
-                    ForumListItem listItem = new ForumListItem(header, author);
+                    ForumListItem listItem = new ForumListItem(header, author, type);
                     commentList.add(listItem);
                     //this.subthemeList.put(parentname, listItem);
                     //SubTheme mySubTheme = myTheme.createSubTheme(subTitle);

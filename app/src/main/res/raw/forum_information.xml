@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <forumtopics>
     <topic>
+        <iAmA>theme</iAmA>
         <topName>Organisatorisches</topName>
         <description> jajajaja</description>
             <subcat>
+                <iAmA>subTheme</iAmA>
                 <subName> blas blubb</subName>
-
                     <comment>
+                        <iAmA>comment</iAmA>
                         <header>comments 3</header>
                         <author>comments: 3</author>
                         <text>fdgst</text>
                     </comment>
-                <comment>pkasbdkasf</comment>
+                <comment>
+                    <iAmA>comment</iAmA>
+                    <header>comments 3</header>
+                    <author>comments: 3</author>
+                    <text>fdgst</text>
+                </comment>
             </subcat>
             <subcat>
+                <iAmA>subTheme</iAmA>
                 <subName>LKJIDFBSDF</subName>
-                <comment>comments 5</comment>
-                <comment>dfdfg: 3</comment>
-             <comment>comments: 0</comment>
+                    <comment>
+                        <iAmA>comment</iAmA>
+                        <header>casdas</header>
+                        <author>comments: 3</author>
+                        <text>fdgst</text>
+                    </comment>
+                    <comment>
+                        <iAmA>comment</iAmA>
+                        <header>csdfyxs</header>
+                        <author>comments: 3</author>
+                    <text>fdgst</text>
+                </comment>
+                    <comment>comments: 0</comment>
             </subcat>
 
             <subcat>
+                <iAmA>subTheme</iAmA>
                 <subName>daten</subName>
             </subcat>
     </topic>
 
     <topic>
+        <iAmA>theme</iAmA>
         <topName>drecks</topName>
         <description>blalallsfk</description>
             <subcat>
-                 <subName>LKJIDFBSDF</subName>
+                <iAmA>subTheme</iAmA>
+                <subName>LKJIDFBSDF</subName>
             </subcat>
     </topic>
 
     <topic>
+        <iAmA>theme</iAmA>
         <topName>zeug</topName>
         <description>trololo</description>
     </topic>

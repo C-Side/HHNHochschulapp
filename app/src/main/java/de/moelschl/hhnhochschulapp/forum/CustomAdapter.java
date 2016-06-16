@@ -19,6 +19,8 @@ import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
 public class CustomAdapter extends BaseAdapter {
 
     private ArrayList<ForumListItem> myList;
+    private ArrayList<ForumListItem> lastList = new ArrayList<>();
+
     private LayoutInflater inflater;
     private Context context;
 
@@ -81,5 +83,15 @@ public class CustomAdapter extends BaseAdapter {
         myList.clear();
         myList = newList;
         notifyDataSetChanged();
+    }
+
+    public ArrayList<ForumListItem> getLastList() {
+        return lastList;
+    }
+
+    public void setList(){
+        for (ForumListItem listItem : myList){
+            lastList.add(listItem);
+        }
     }
 }

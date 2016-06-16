@@ -34,11 +34,11 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.context = getContext();
-        xmlFactory = new XMLFactory();
+        this.xmlFactory = new XMLFactory();
         View rootView = inflater.inflate(R.layout.fragment_forum, container, false);
 
 
-        backButton = (Button) rootView.findViewById(R.id.backButton);
+        this.backButton = (Button) rootView.findViewById(R.id.backButton);
         backButton.setOnClickListener(this);
 
         this.customAdapter = new CustomAdapter(getActivity(), xmlFactory.createTopic(context));
@@ -51,9 +51,15 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
+        ArrayList<ForumListItem> nextList = null;
         ForumListItem listItem = (ForumListItem) l.getAdapter().getItem(position);
-        ArrayList<ForumListItem> nextList = xmlFactory.getSubListByParent(listItem.getTitle());
+        if(listItem.getListHirarchie().equals("theme")){
+            nextList = xmlFactory.getSubListByParent(listItem.getTitle());
+        }
+        else if (listItem.getListHirarchie().equals("subTheme")){
+            nextList = xmlFactory.getCommentListByParent(listItem.getTitle());
+        }
+        else {}
 
         customAdapter.loadNewData(nextList);
     }
@@ -72,7 +78,9 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        customAdapter.loadNewData(xmlFactory.createTopic(context));
+        customAdapter.setList();
+        ArrayList<ForumListItem> lastList = customAdapter.getLastList();
+        customAdapter.loadNewData(lastList);
 
        /**
         switch (v.getId()) {
