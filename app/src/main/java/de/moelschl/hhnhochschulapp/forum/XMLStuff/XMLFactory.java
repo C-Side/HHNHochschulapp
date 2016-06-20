@@ -38,6 +38,10 @@ public class XMLFactory {
     private static ArrayList<ForumListItem> subThemeList;
     private static ArrayList<ForumListItem> commentList;
 
+    /**
+     * constructor for the factory default.
+     */
+
     public XMLFactory(){
 
     }
@@ -74,7 +78,7 @@ public class XMLFactory {
      * @param parentname the clicked String title of the item in the list
      * @return the subtheme list depended on the parentname laded from XML
      */
-    public static ArrayList<ForumListItem> getSubListByParent (String parentname){
+    public static ArrayList<ForumListItem> createSubListByParent (String parentname){
 
         subThemeList = new ArrayList<>();
 
@@ -86,13 +90,11 @@ public class XMLFactory {
 
                     for (Element subtheme: subTopics){
                         String subTitle = subtheme.getChildText("subName");
-                        String description = "default desc";
+                        String commentCount = "Kommentare: " + createCommentListByParent(subTitle).size();
                         String type = "subTheme";
 
-                        ForumListItem listItem = new ForumListItem(subTitle, description, type);
+                        ForumListItem listItem = new ForumListItem(subTitle, commentCount, type);
                         subThemeList.add(listItem);
-
-                        System.out.println("--- subtheme -- " +parentname + " + " + subTitle);
                     }
                 }
             }
@@ -107,7 +109,7 @@ public class XMLFactory {
      * @param parentname the clicked String subtitle of the item in the list
      * @return the comment list depended on the parentname laded from XML
      */
-    public static ArrayList<ForumListItem> getCommentListByParent (String parentname){
+    public static ArrayList<ForumListItem> createCommentListByParent (String parentname){
 
         commentList = new ArrayList<>();
 

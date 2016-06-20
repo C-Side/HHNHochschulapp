@@ -21,7 +21,7 @@ import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
 
 public class CustomAdapter extends BaseAdapter {
 
-    private ArrayList<ForumListItem> myList = new ArrayList<>();
+    private ArrayList<ForumListItem> workingList = new ArrayList<>();
     private LayoutInflater inflater;
     private Context context;
 
@@ -33,7 +33,7 @@ public class CustomAdapter extends BaseAdapter {
      * @param listItem the first shown list of the Forum.
      */
     public CustomAdapter(Context context, ArrayList<ForumListItem> listItem) {
-        this.myList = listItem;
+        this.workingList = listItem;
         this.context = context;
         inflater = LayoutInflater.from(this.context);
     }
@@ -44,7 +44,7 @@ public class CustomAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return myList.size();
+        return workingList.size();
     }
 
     /**
@@ -55,7 +55,7 @@ public class CustomAdapter extends BaseAdapter {
      */
     @Override
     public ForumListItem getItem(int position) {
-        return myList.get(position);
+        return workingList.get(position);
     }
 
     /**
@@ -106,7 +106,7 @@ public class CustomAdapter extends BaseAdapter {
      * @param nextList the new list which will be shown.
      */
     public void loadNewData(ArrayList<ForumListItem> nextList){
-        myList = nextList;
+        workingList = nextList;
         notifyDataSetChanged();
     }
 
@@ -115,7 +115,7 @@ public class CustomAdapter extends BaseAdapter {
      * @param lastList the list before button was clicked
      */
     public void goBack(ArrayList<ForumListItem> lastList){
-        myList = lastList;
+        workingList = lastList;
         notifyDataSetChanged();
     }
 
@@ -125,7 +125,7 @@ public class CustomAdapter extends BaseAdapter {
      */
 
     public ArrayList<ForumListItem> getMyList(){
-        return myList;
+        return workingList;
     }
 
     /**

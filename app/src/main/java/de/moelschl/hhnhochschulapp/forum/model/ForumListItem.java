@@ -14,7 +14,7 @@ public class ForumListItem {
      * constructor to initialize a Object
      *
      * @param title the title of the row
-     * @param description the descripotion of the title
+     * @param description the descripotion or additional information of the title or the forum row
      * @param iAmA tells the system what type of lsit the Object belongs to.
      */
     public ForumListItem(String title, String description, String iAmA){

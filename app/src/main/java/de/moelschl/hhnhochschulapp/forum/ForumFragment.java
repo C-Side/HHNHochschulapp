@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 
 import de.moelschl.hhnhochschulapp.R;
@@ -27,11 +26,8 @@ import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
 public class ForumFragment extends ListFragment implements View.OnClickListener {
 
     private CustomAdapter customAdapter;
-
     private Button backButton;
-
     private Context context;
-
 
     /**
      *
@@ -43,6 +39,7 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
      * @param savedInstanceState a mapping form String values to whatever you want.
      * @return the showable View.
      */
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +50,8 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
         this.backButton = (Button) rootView.findViewById(R.id.backButton);
         backButton.setOnClickListener(this);
 
+        activateBackSwipeRightLeft(rootView);
+
         this.customAdapter = new CustomAdapter(getActivity(), XMLFactory.createTopic(context));
         setListAdapter(customAdapter);
 
@@ -60,7 +59,7 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
     }
 
     /**
-     * loads new items inside the list. The listitem in each list (themeList, subthemeList, commentList)
+     * loads new items inside the list after a click on it. The listitem in each list (themeList, subthemeList, commentList)
      * are connected in a StringBuild way, so every new list is loaded by the clicked itemName of
      * the listItem.
      *
@@ -80,12 +79,11 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
         }
         else {
             if (listItem.getListHirarchie().equals("theme")) {
-                nextList = XMLFactory.getSubListByParent(listItem.getTitle());
+                nextList = XMLFactory.createSubListByParent(listItem.getTitle());
             } else if (listItem.getListHirarchie().equals("subTheme")) {
-                nextList = XMLFactory.getCommentListByParent(listItem.getTitle());
+                nextList = XMLFactory.createCommentListByParent(listItem.getTitle());
             } else {
             }
-
             customAdapter.loadNewData(nextList);
         }
 
@@ -97,28 +95,66 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
      * @param v the clicked button view
      */
 
+
     @Override
     public void onClick(View v) {
+        /**
         ArrayList <ForumListItem> lastList = null;
+        ArrayList <ForumListItem> workingList = customAdapter.getMyList();
 
-        if (customAdapter.getMyList().isEmpty()){
+        if (workingList.isEmpty()){
             lastList = XMLFactory.createTopic(context);
+            backButton.setClickable(false);
 
             System.out.println("Error: there is no item inside the subcatList so i cant load the" +
                     "previous depending on the current list");
         }
         else {
-            if(customAdapter.getMyList().get(0).getListHirarchie().equals("comment")){
+            if(workingList.get(0).getListHirarchie().equals("comment")){
                 lastList = XMLFactory.getSubThemeList();
+                backButton.setClickable(true);
             }
-            else if (customAdapter.getMyList().get(0).getListHirarchie().equals("subTheme")){
+            else if (workingList.get(0).getListHirarchie().equals("subTheme")){
                 lastList = XMLFactory.getThemeList();
+                backButton.setClickable(false);
             }
             else {}
         }
 
         customAdapter.goBack(lastList);
+         */
     }
+
+    private void activateBackSwipeRightLeft(View rootView) {
+        rootView.setOnTouchListener(new OnSwipeTouchListener(context) {
+            @Override
+            public void onSwipeLeft() {
+            }
+
+
+            @Override
+            public void onSwipeRight() {
+                ArrayList<ForumListItem> lastList = null;
+                ArrayList<ForumListItem> workingList = customAdapter.getMyList();
+
+                if (workingList.isEmpty()) {
+                    lastList = XMLFactory.createTopic(context);
+                    System.out.println("Error: there is no item inside the subcatList so i cant load the" +
+                            "previous depending on the current list");
+                } else {
+                    if (workingList.get(0).getListHirarchie().equals("comment")) {
+                        lastList = XMLFactory.getSubThemeList();
+                    } else if (workingList.get(0).getListHirarchie().equals("subTheme")) {
+                        lastList = XMLFactory.getThemeList();
+                    } else {
+                    }
+                }
+
+                customAdapter.goBack(lastList);
+            }
+        });
+    }
+
 }
 
 
