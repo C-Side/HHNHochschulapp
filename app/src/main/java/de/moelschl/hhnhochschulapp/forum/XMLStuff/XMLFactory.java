@@ -43,17 +43,16 @@ public class XMLFactory {
     }
 
     /**
-     * creates a List of Listcontexts which are the information for the Forum
+     * creates a List of {@link de.moelschl.hhnhochschulapp.forum.model.ForumListItem} which are
+     * the information for the Forum. This list consists of topics and the first informatiopn which is
+     * visible
      * @param contextIn the context of the shown window
      */
 
     public static ArrayList<ForumListItem> createTopic(Context contextIn) {
-
         themeList = new ArrayList<>();
-        //  Card.getAllCards().clear();
 
             Element root = buildRootElement(contextIn);
-            // put the topics into a list (<topic>)
             topics = root.getChildren("topic");
 
             for (Element topic : topics) {
@@ -68,6 +67,13 @@ public class XMLFactory {
         return themeList;
     }
 
+    /**
+     * creates a List of {@link de.moelschl.hhnhochschulapp.forum.model.ForumListItem} which are
+     * the information for the Forum. This list consists of subThemes.
+     *
+     * @param parentname the clicked String title of the item in the list
+     * @return the subtheme list depended on the parentname laded from XML
+     */
     public static ArrayList<ForumListItem> getSubListByParent (String parentname){
 
         subThemeList = new ArrayList<>();
@@ -94,6 +100,13 @@ public class XMLFactory {
         return subThemeList;
     }
 
+    /**
+     * creates a List of {@link de.moelschl.hhnhochschulapp.forum.model.ForumListItem} which are
+     * the information for the Forum. This list consists of comments.
+     *
+     * @param parentname the clicked String subtitle of the item in the list
+     * @return the comment list depended on the parentname laded from XML
+     */
     public static ArrayList<ForumListItem> getCommentListByParent (String parentname){
 
         commentList = new ArrayList<>();
@@ -118,6 +131,12 @@ public class XMLFactory {
         return commentList;
     }
 
+    /**
+     * builds the root element to iterate over with SaxxBUilder and buffered reader
+     *
+     * @param contextIn {@link android.content.Context}
+     * @return the root element to iterate over
+     */
     private static Element buildRootElement(Context contextIn){
         Element root = null;
         try {
@@ -137,14 +156,26 @@ public class XMLFactory {
         return root;
     }
 
+    /**
+     * getter of the static commentList
+     * @return the static commentList
+     */
     public static ArrayList<ForumListItem> getCommentList() {
         return commentList;
     }
 
+    /**
+     * getter of the static subTheeList
+     * @return the static subTheeList
+     */
     public static ArrayList<ForumListItem> getSubThemeList() {
         return subThemeList;
     }
 
+    /**
+     * getter of the static themeList
+     * @return the static themeList
+     */
     public static ArrayList<ForumListItem> getThemeList() {
         return themeList;
     }
