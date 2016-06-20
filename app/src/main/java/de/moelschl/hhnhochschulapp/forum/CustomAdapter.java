@@ -18,9 +18,7 @@ import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
  */
 public class CustomAdapter extends BaseAdapter {
 
-    private ArrayList<ForumListItem> myList;
-    private ArrayList<ForumListItem> lastList = new ArrayList<>();
-
+    private ArrayList<ForumListItem> myList = new ArrayList<>();
     private LayoutInflater inflater;
     private Context context;
 
@@ -79,19 +77,17 @@ public class CustomAdapter extends BaseAdapter {
         }
     }
 
-    public void loadNewData(ArrayList<ForumListItem> newList){
-        myList.clear();
-        myList = newList;
+    public void loadNewData(ArrayList<ForumListItem> nextList){
+        myList = nextList;
         notifyDataSetChanged();
     }
 
-    public ArrayList<ForumListItem> getLastList() {
-        return lastList;
+    public void goBack(ArrayList<ForumListItem> lastList){
+        myList = lastList;
+        notifyDataSetChanged();
     }
 
-    public void setList(){
-        for (ForumListItem listItem : myList){
-            lastList.add(listItem);
-        }
+    public ArrayList<ForumListItem> getMyList(){
+        return myList;
     }
 }
