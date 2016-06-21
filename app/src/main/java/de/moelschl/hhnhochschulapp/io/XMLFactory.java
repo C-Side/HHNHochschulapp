@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp.forum.XMLStuff;
+package de.moelschl.hhnhochschulapp.io;
 
 import android.content.Context;
 
@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -16,7 +15,7 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
+import de.moelschl.hhnhochschulapp.model.ForumListItem;
 
 
 /**
@@ -47,7 +46,7 @@ public class XMLFactory {
     }
 
     /**
-     * creates a List of {@link de.moelschl.hhnhochschulapp.forum.model.ForumListItem} which are
+     * creates a List of {@link de.moelschl.hhnhochschulapp.model.ForumListItem} which are
      * the information for the Forum. This list consists of topics and the first informatiopn which is
      * visible
      * @param contextIn the context of the shown window
@@ -72,7 +71,7 @@ public class XMLFactory {
     }
 
     /**
-     * creates a List of {@link de.moelschl.hhnhochschulapp.forum.model.ForumListItem} which are
+     * creates a List of {@link de.moelschl.hhnhochschulapp.model.ForumListItem} which are
      * the information for the Forum. This list consists of subThemes.
      *
      * @param parentname the clicked String title of the item in the list
@@ -103,7 +102,7 @@ public class XMLFactory {
     }
 
     /**
-     * creates a List of {@link de.moelschl.hhnhochschulapp.forum.model.ForumListItem} which are
+     * creates a List of {@link de.moelschl.hhnhochschulapp.model.ForumListItem} which are
      * the information for the Forum. This list consists of comments.
      *
      * @param parentname the clicked String subtitle of the item in the list

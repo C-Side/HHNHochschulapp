@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp;
+package de.moelschl.hhnhochschulapp.controller;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import de.moelschl.hhnhochschulapp.R;
 
 /**
  * Created by moelscmar on 19.05.2016.

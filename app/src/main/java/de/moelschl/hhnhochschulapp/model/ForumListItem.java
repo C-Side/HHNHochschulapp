@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp.forum.model;
+package de.moelschl.hhnhochschulapp.model;
 
 
 /**

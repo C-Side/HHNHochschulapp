@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp.forum;
+package de.moelschl.hhnhochschulapp.controller;
 
 import android.app.ListFragment;
 import android.content.Context;
@@ -12,8 +12,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.forum.XMLStuff.XMLFactory;
-import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
+import de.moelschl.hhnhochschulapp.tools.CustomAdapter;
+import de.moelschl.hhnhochschulapp.tools.OnSwipeTouchListener;
+import de.moelschl.hhnhochschulapp.io.XMLFactory;
+import de.moelschl.hhnhochschulapp.model.ForumListItem;
 
 /**
  * this class is the base logic of the forum. The forum is is a visible list of themes, subthemes and

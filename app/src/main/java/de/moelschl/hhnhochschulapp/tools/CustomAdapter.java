@@ -1,5 +1,5 @@
 
-package de.moelschl.hhnhochschulapp.forum;
+package de.moelschl.hhnhochschulapp.tools;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.forum.model.ForumListItem;
+import de.moelschl.hhnhochschulapp.model.ForumListItem;
 
 /**
  * sets the custom row layout of the Listfragment. Custom is two rows and a icon inside

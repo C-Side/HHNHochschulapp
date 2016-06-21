@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp;
+package de.moelschl.hhnhochschulapp.controller;
 
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +19,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.controller.BenachrichtigungenFragment;
 
 public class NachrichtActivity extends AppCompatActivity {
     InputStream is;

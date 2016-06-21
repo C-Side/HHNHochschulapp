@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp;
+package de.moelschl.hhnhochschulapp.controller;
 
 import android.app.Fragment;
 import android.os.Bundle;

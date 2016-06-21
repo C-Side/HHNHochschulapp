@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp;
+package de.moelschl.hhnhochschulapp.controller;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -21,15 +21,14 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import de.moelschl.hhnhochschulapp.R;
 
 /**
  * Created by moelscmar on 19.05.2016.

@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp.forum;
+package de.moelschl.hhnhochschulapp.tools;
 
 import android.content.Context;
 import android.view.GestureDetector;
