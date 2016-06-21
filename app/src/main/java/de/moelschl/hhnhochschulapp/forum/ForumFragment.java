@@ -47,7 +47,7 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
 
         View rootView = inflater.inflate(R.layout.fragment_forum, container, false);
 
-        this.backButton = (Button) rootView.findViewById(R.id.backButton);
+        this.backButton = (Button) rootView.findViewById(R.id.newItem);
         backButton.setOnClickListener(this);
 
         activateBackSwipeRightLeft(rootView);
