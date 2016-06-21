@@ -23,6 +23,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import de.moelschl.hhnhochschulapp.forum.ForumFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,7 +55,6 @@ public class MainActivity extends AppCompatActivity
         fm.beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 
         setAllImageListeners();
-     
 
 
     }
@@ -266,6 +267,4 @@ public class MainActivity extends AppCompatActivity
         DrawableCompat.setTint(iliasImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         setTitle("Tutorial");
     }
-
-
 }
