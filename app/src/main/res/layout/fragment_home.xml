@@ -46,7 +46,7 @@
             android:textSize="30dp" />
 
         <Space
-            android:layout_width="550px"
+            android:layout_width="350px"
             android:layout_height="20px" />
 
         <Button
@@ -80,21 +80,15 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+        android:padding="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Interface Projects"
-            android:id="@+id/textView3" />
-
-        <Space
-            android:layout_width="230px"
-            android:layout_height="20px" />
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:text="Interface Projects" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,7 +98,7 @@
             android:id="@+id/textViewRoom1" />
 
         <Space
-            android:layout_width="50px"
+            android:layout_width="110px"
             android:layout_height="20px" />
 
         <TextView
@@ -118,36 +112,28 @@
     </TableRow>
 
     <TableRow
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#dbe1eb"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" >
+        android:padding="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="SV Besprechung"
-            android:id="@+id/textView19" />
-
-        <Space
-            android:layout_width="160px"
-            android:layout_height="20px"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:text="Besprechung SV" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="SEB Raum"
-            android:id="@+id/textView20" />
+            android:id="@+id/textView8" />
 
         <Space
-            android:layout_width="50px"
+            android:layout_width="30px"
             android:layout_height="20px" />
 
         <TextView
@@ -155,27 +141,21 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="10:30 - 11:15"
-            android:id="@+id/textView21" />
+            android:id="@+id/textView9" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+        android:padding="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="IProg Übung"
-            android:id="@+id/textView16" />
-
-        <Space
-            android:layout_width="350px"
-            android:layout_height="20px" />
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/editText3"
+            android:text="IProg Übung" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -185,7 +165,7 @@
             android:id="@+id/textView10" />
 
         <Space
-            android:layout_width="50px"
+            android:layout_width="110px"
             android:layout_height="20px" />
 
         <TextView
@@ -194,7 +174,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="14:30 - 16:00"
             android:id="@+id/textView11" />
-
     </TableRow>
 
     <TableRow
@@ -217,21 +196,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+        android:padding="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="LA&amp;CG"
-            android:id="@+id/textView17" />
-
-        <Space
-            android:layout_width="460px"
-            android:layout_height="20px" />
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/editText4"
+            android:text="LA&amp;CG" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -241,7 +214,7 @@
             android:id="@+id/textView12" />
 
         <Space
-            android:layout_width="50px"
+            android:layout_width="110px"
             android:layout_height="20px" />
 
         <TextView
@@ -256,21 +229,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#dbe1eb"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp">
+        android:padding="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Algo"
-            android:id="@+id/textView18" />
-
-        <Space
-            android:layout_width="520px"
-            android:layout_height="20px" />
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/editText5"
+            android:text="Algo" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -280,7 +247,7 @@
             android:id="@+id/textView14" />
 
         <Space
-            android:layout_width="50px"
+            android:layout_width="110px"
             android:layout_height="20px" />
 
         <TextView
