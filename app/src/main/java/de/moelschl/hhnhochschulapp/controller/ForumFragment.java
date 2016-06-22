@@ -98,6 +98,7 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
      */
 
 
+
     @Override
     public void onClick(View v) {
         /**

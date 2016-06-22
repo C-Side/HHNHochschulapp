@@ -241,6 +241,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void openForum(){
+        startActivity(new Intent(MainActivity.this, ForumActivity.class));
+
+        /**
         android.app.FragmentManager fm = getFragmentManager();
         fm.beginTransaction().replace(R.id.content_frame, new ForumFragment()).commit();
         DrawableCompat.setTint(einstellungenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
@@ -248,7 +251,8 @@ public class MainActivity extends AppCompatActivity
         DrawableCompat.setTint(homeImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(nachrichtenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(iliasImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
-        setTitle("Forum");
+         */
+        //setTitle("Forum");
     }
 
     private void openTutorial(){
