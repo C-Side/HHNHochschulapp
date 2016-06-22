@@ -7,10 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import java.util.ArrayList;
-
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.tools.CustomAdapter;
 import de.moelschl.hhnhochschulapp.tools.OnSwipeTouchListener;
@@ -28,7 +26,6 @@ import de.moelschl.hhnhochschulapp.model.ForumListItem;
 public class ForumFragment extends ListFragment implements View.OnClickListener {
 
     private CustomAdapter customAdapter;
-    private Button backButton;
     private Context context;
 
     /**
@@ -48,10 +45,6 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
         this.context = getContext();
 
         View rootView = inflater.inflate(R.layout.fragment_forum, container, false);
-
-        this.backButton = (Button) rootView.findViewById(R.id.newItem);
-        backButton.setOnClickListener(this);
-
         activateBackSwipeRightLeft(rootView);
 
         this.customAdapter = new CustomAdapter(getActivity(), XMLFactory.createTopic(context));
