@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import de.moelschl.hhnhochschulapp.Forum.FoActivity;
 import de.moelschl.hhnhochschulapp.R;
 
 public class MainActivity extends AppCompatActivity
@@ -241,11 +242,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void openForum(){
-        startActivity(new Intent(MainActivity.this, ForumActivity.class));
+        startActivity(new Intent(MainActivity.this, FoActivity.class));
 
         /**
         android.app.FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, new ForumFragment()).commit();
+        fm.beginTransaction().replace(R.id.content_frame, new FoThemeFragment()).commit();
         DrawableCompat.setTint(einstellungenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(kalenderImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(homeImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));

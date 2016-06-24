@@ -15,7 +15,7 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.model.ForumListItem;
+import de.moelschl.hhnhochschulapp.model.ThemeListItem;
 
 
 /**
@@ -33,9 +33,9 @@ public class XMLFactory {
     private static List<Element> comment;
 
     //external list for everyone
-    private static ArrayList<ForumListItem> themeList;
-    private static ArrayList<ForumListItem> subThemeList;
-    private static ArrayList<ForumListItem> commentList;
+    private static ArrayList<ThemeListItem> themeList;
+    private static ArrayList<ThemeListItem> subThemeList;
+    private static ArrayList<ThemeListItem> commentList;
 
     /**
      * constructor for the factory default.
@@ -46,13 +46,13 @@ public class XMLFactory {
     }
 
     /**
-     * creates a List of {@link de.moelschl.hhnhochschulapp.model.ForumListItem} which are
+     * creates a List of {@link ThemeListItem} which are
      * the information for the Forum. This list consists of topics and the first informatiopn which is
      * visible
      * @param contextIn the context of the shown window
      */
 
-    public static ArrayList<ForumListItem> createTopic(Context contextIn) {
+    public static ArrayList<ThemeListItem> createTopic(Context contextIn) {
         themeList = new ArrayList<>();
 
             Element root = buildRootElement(contextIn);
@@ -63,7 +63,7 @@ public class XMLFactory {
                 String description = topic.getChildText("description");
                 String type = "theme";
 
-                ForumListItem listItem = new ForumListItem(title, description,type);
+                ThemeListItem listItem = new ThemeListItem(title, description,type);
                 themeList.add(listItem);
             }
 
@@ -71,13 +71,13 @@ public class XMLFactory {
     }
 
     /**
-     * creates a List of {@link de.moelschl.hhnhochschulapp.model.ForumListItem} which are
+     * creates a List of {@link ThemeListItem} which are
      * the information for the Forum. This list consists of subThemes.
      *
      * @param parentname the clicked String title of the item in the list
      * @return the subtheme list depended on the parentname laded from XML
      */
-    public static ArrayList<ForumListItem> createSubListByParent (String parentname){
+    public static ArrayList<ThemeListItem> createSubListByParent (String parentname){
 
         subThemeList = new ArrayList<>();
 
@@ -92,7 +92,7 @@ public class XMLFactory {
                         String commentCount = "Kommentare: " + createCommentListByParent(subTitle).size();
                         String type = "subTheme";
 
-                        ForumListItem listItem = new ForumListItem(subTitle, commentCount, type);
+                        ThemeListItem listItem = new ThemeListItem(subTitle, commentCount, type);
                         subThemeList.add(listItem);
                     }
                 }
@@ -102,13 +102,13 @@ public class XMLFactory {
     }
 
     /**
-     * creates a List of {@link de.moelschl.hhnhochschulapp.model.ForumListItem} which are
+     * creates a List of {@link ThemeListItem} which are
      * the information for the Forum. This list consists of comments.
      *
      * @param parentname the clicked String subtitle of the item in the list
      * @return the comment list depended on the parentname laded from XML
      */
-    public static ArrayList<ForumListItem> createCommentListByParent (String parentname){
+    public static ArrayList<ThemeListItem> createCommentListByParent (String parentname){
 
         commentList = new ArrayList<>();
 
@@ -124,7 +124,7 @@ public class XMLFactory {
                     String type = "comment";
                     //String description = "default desc";
 
-                    ForumListItem listItem = new ForumListItem(header, author, type);
+                    ThemeListItem listItem = new ThemeListItem(header, author, type);
                     commentList.add(listItem);
                 }
             }
@@ -161,7 +161,7 @@ public class XMLFactory {
      * getter of the static commentList
      * @return the static commentList
      */
-    public static ArrayList<ForumListItem> getCommentList() {
+    public static ArrayList<ThemeListItem> getCommentList() {
         return commentList;
     }
 
@@ -169,7 +169,7 @@ public class XMLFactory {
      * getter of the static subTheeList
      * @return the static subTheeList
      */
-    public static ArrayList<ForumListItem> getSubThemeList() {
+    public static ArrayList<ThemeListItem> getSubThemeList() {
         return subThemeList;
     }
 
@@ -177,7 +177,7 @@ public class XMLFactory {
      * getter of the static themeList
      * @return the static themeList
      */
-    public static ArrayList<ForumListItem> getThemeList() {
+    public static ArrayList<ThemeListItem> getThemeList() {
         return themeList;
     }
 }

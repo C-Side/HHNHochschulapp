@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp.controller;
+package de.moelschl.hhnhochschulapp.Forum;
 
 import android.app.ListFragment;
 import android.content.Context;
@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import java.util.ArrayList;
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.model.ThemeListItem;
 import de.moelschl.hhnhochschulapp.tools.CustomAdapter;
 import de.moelschl.hhnhochschulapp.tools.OnSwipeTouchListener;
 import de.moelschl.hhnhochschulapp.io.XMLFactory;
-import de.moelschl.hhnhochschulapp.model.ForumListItem;
 
 /**
  * this class is the base logic of the forum. The forum is is a visible list of themes, subthemes and
@@ -23,7 +23,7 @@ import de.moelschl.hhnhochschulapp.model.ForumListItem;
  *
  *
  */
-public class ForumFragment extends ListFragment implements View.OnClickListener {
+public class FoThemeFragment extends ListFragment implements View.OnClickListener {
 
     private CustomAdapter customAdapter;
     private Context context;
@@ -44,7 +44,7 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.context = getContext();
 
-        View rootView = inflater.inflate(R.layout.fragment_forum, container, false);
+        View rootView = inflater.inflate(R.layout.fo_theme_fragment, container, false);
         activateBackSwipeRightLeft(rootView);
 
         this.customAdapter = new CustomAdapter(getActivity(), XMLFactory.createTopic(context));
@@ -66,8 +66,8 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        ArrayList<ForumListItem> nextList = null;
-        ForumListItem listItem = (ForumListItem) l.getAdapter().getItem(position);
+        ArrayList<ThemeListItem> nextList = null;
+        ThemeListItem listItem = (ThemeListItem) l.getAdapter().getItem(position);
 
         if (listItem.getListHirarchie().equals("comment")){
 
@@ -95,8 +95,8 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         /**
-        ArrayList <ForumListItem> lastList = null;
-        ArrayList <ForumListItem> workingList = customAdapter.getMyList();
+        ArrayList <ThemeListItem> lastList = null;
+        ArrayList <ThemeListItem> workingList = customAdapter.getMyList();
 
         if (workingList.isEmpty()){
             lastList = XMLFactory.createTopic(context);
@@ -130,8 +130,8 @@ public class ForumFragment extends ListFragment implements View.OnClickListener 
 
             @Override
             public void onSwipeRight() {
-                ArrayList<ForumListItem> lastList = null;
-                ArrayList<ForumListItem> workingList = customAdapter.getMyList();
+                ArrayList<ThemeListItem> lastList = null;
+                ArrayList<ThemeListItem> workingList = customAdapter.getMyList();
 
                 if (workingList.isEmpty()) {
                     lastList = XMLFactory.createTopic(context);

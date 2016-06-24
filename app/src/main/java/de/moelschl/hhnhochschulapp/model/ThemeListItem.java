@@ -4,7 +4,7 @@ package de.moelschl.hhnhochschulapp.model;
 /**
  * class which holds information for the forum rows.
  */
-public class ForumListItem {
+public class ThemeListItem {
 
     private String title;
     private String description;
@@ -17,7 +17,7 @@ public class ForumListItem {
      * @param description the descripotion or additional information of the title or the forum row
      * @param iAmA tells the system what type of lsit the Object belongs to.
      */
-    public ForumListItem(String title, String description, String iAmA){
+    public ThemeListItem(String title, String description, String iAmA){
         this.title = title;
         this.description = description;
         this.iAmA = iAmA;
