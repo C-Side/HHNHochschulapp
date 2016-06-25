@@ -12,6 +12,9 @@ import de.moelschl.hhnhochschulapp.R;
  * Created by Hasbert on 22.06.2016.
  */
 public class FoToolbarFragment extends Fragment{
+    public FoToolbarFragment(){
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

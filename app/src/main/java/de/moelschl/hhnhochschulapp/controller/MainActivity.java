@@ -17,7 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import de.moelschl.hhnhochschulapp.Forum.FoActivity;
+import de.moelschl.hhnhochschulapp.controller.Forum.FoActivity;
 import de.moelschl.hhnhochschulapp.R;
 
 public class MainActivity extends AppCompatActivity
