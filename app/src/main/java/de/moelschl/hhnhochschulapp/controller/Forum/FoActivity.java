@@ -44,8 +44,6 @@ public class FoActivity extends AppCompatActivity implements View.OnClickListene
         ft.commit();
 
         setTitle("Forum");
-
-
     }
 
 

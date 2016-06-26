@@ -3,14 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HHNHochschulapp.iml" filepath="$PROJECT_DIR$/HHNHochschulapp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/HHNHochschulapp.iml" filepath="$PROJECT_DIR$/.idea/modules/HHNHochschulapp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/HHNHochschulappGit.iml" filepath="$PROJECT_DIR$/HHNHochschulappGit.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/jdom-2.0.6/jdom-2.0.6.iml" filepath="$PROJECT_DIR$/jdom-2.0.6/jdom-2.0.6.iml" />
-      <module fileurl="file://$PROJECT_DIR$/jdom-2.0.6/jdom-2.0.6.iml" filepath="$PROJECT_DIR$/jdom-2.0.6/jdom-2.0.6.iml" />
-      <module fileurl="file://$PROJECT_DIR$/jdom-2.0.6/jdom-2.0.6.iml" filepath="$PROJECT_DIR$/jdom-2.0.6/jdom-2.0.6.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jdom-2.0.6/jdom-2.0.6.iml" filepath="$PROJECT_DIR$/.idea/modules/jdom-2.0.6/jdom-2.0.6.iml" />
     </modules>
   </component>
 </project>
