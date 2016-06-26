@@ -4,23 +4,22 @@ package de.moelschl.hhnhochschulapp.model;
 /**
  * class which holds information for the forum rows.
  */
-public class ForumListItem {
+public class ThemeListItem {
 
-    private String title;
+    private String topic;
     private String description;
-    private String iAmA;
+    private int threadCounter;
 
     /**
      * constructor to initialize a Object
      *
-     * @param title the title of the row
+     * @param topic the title of the row
      * @param description the descripotion or additional information of the title or the forum row
-     * @param iAmA tells the system what type of lsit the Object belongs to.
      */
-    public ForumListItem(String title, String description, String iAmA){
-        this.title = title;
+    public ThemeListItem(String topic, String description, int threadCounter){
+        this.topic = topic;
         this.description = description;
-        this.iAmA = iAmA;
+        this.threadCounter = threadCounter;
     }
 
     /**
@@ -28,8 +27,8 @@ public class ForumListItem {
      * @return the title
      */
 
-    public String getTitle() {
-        return title;
+    public String getTopic() {
+        return topic;
     }
 
     /**
@@ -42,11 +41,11 @@ public class ForumListItem {
     }
 
     /**
-     * getter for the list the object belongs to
-     * @return the String name of the list the object belongs to
+     * getter for the number of threads in this theme
+     * @return the threadCounter
      */
 
-    public String getListHirarchie() {
-        return iAmA;
+    public int getThreadCounter() {
+        return threadCounter;
     }
 }
