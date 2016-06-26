@@ -1,5 +1,6 @@
 package de.moelschl.hhnhochschulapp.controller.Forum;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -11,22 +12,23 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.model.ThemeListItem;
-import de.moelschl.hhnhochschulapp.tools.CustomAdapter;
+import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
+import de.moelschl.hhnhochschulapp.tools.ThemeAdapter;
 import de.moelschl.hhnhochschulapp.tools.OnSwipeTouchListener;
-import de.moelschl.hhnhochschulapp.io.XMLFactory;
 
 /**
- * this class is the base logic of the forum. The forum is is a visible list of themes, subthemes and
- * comments which cna be editted. the class provides methods for click handling and has a connection
- * to the custom Adapter who is responsible for the visualization and the XMLFactory where the data
- * to show, comes from. FomumFragment implements Listfragment to make use of a proper custom List.
- *
+ * this class provides a List Fragment which will be placed in a activity. It gets information of
+ * the database and shows the full table
  *
  */
-public class FoThemeFragment extends ListFragment implements View.OnClickListener {
 
-    private CustomAdapter customAdapter;
+public class FoThemeFragment extends ListFragment {
+
+    private ThemeAdapter themeAdapter;
+    private DatabaseHelper dbHelper;
+    private OnThemeSelectedListener listener;
     private Context context;
+
 
     /**
      *
@@ -42,21 +44,19 @@ public class FoThemeFragment extends ListFragment implements View.OnClickListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.context = getContext();
-
         View rootView = inflater.inflate(R.layout.fo_theme_fragment, container, false);
-        activateBackSwipeRightLeft(rootView);
+        //activateBackSwipeRightLeft(rootView);
 
-        this.customAdapter = new CustomAdapter(getActivity(), XMLFactory.createTopic(context));
-        setListAdapter(customAdapter);
+        this.context = getContext();
+        this.dbHelper = new DatabaseHelper(context);
+        this.themeAdapter = new ThemeAdapter(getActivity(), dbHelper.getThemeList());
+        setListAdapter(themeAdapter);
 
         return rootView;
     }
 
     /**
-     * loads new items inside the list after a click on it. The listitem in each list (themeList, subthemeList, commentList)
-     * are connected in a StringBuild way, so every new list is loaded by the clicked itemName of
-     * the listItem.
+     * calles the inner class method onThemeClicked and gives the activity the full control
      *
      * @param l {@link android.widget.ListView}
      * @param v {@link android.view.View}
@@ -66,91 +66,48 @@ public class FoThemeFragment extends ListFragment implements View.OnClickListene
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        ArrayList<ThemeListItem> nextList = null;
-        ThemeListItem listItem = (ThemeListItem) l.getAdapter().getItem(position);
-
-        if (listItem.getListHirarchie().equals("comment")){
-
-        }
-        else {
-            if (listItem.getListHirarchie().equals("theme")) {
-                nextList = XMLFactory.createSubListByParent(listItem.getTitle());
-            } else if (listItem.getListHirarchie().equals("subTheme")) {
-                nextList = XMLFactory.createCommentListByParent(listItem.getTitle());
-            } else {
-            }
-            customAdapter.loadNewData(nextList);
-        }
-
-        System.out.println("Error there is no fragment");
+        listener.onThemeClicked(position);
     }
 
     /**
-     * goes back with a buttonListener method.
-     * @param v the clicked button view
+     * Interface to communicate with the activity
+     *
      */
 
+    public interface OnThemeSelectedListener {
+        void onThemeClicked(int postition);
+    }
 
+    /**
+     * checks that the activity has implemaentated OnThemeSelectedListener
+     *
+     * @param context {@link android.content.Context}
+     */
 
     @Override
-    public void onClick(View v) {
-        /**
-        ArrayList <ThemeListItem> lastList = null;
-        ArrayList <ThemeListItem> workingList = customAdapter.getMyList();
+    public void onAttach(Context context) {
 
-        if (workingList.isEmpty()){
-            lastList = XMLFactory.createTopic(context);
-            backButton.setClickable(false);
-
-            System.out.println("Error: there is no item inside the subcatList so i cant load the" +
-                    "previous depending on the current list");
+        super.onAttach(context);
+        try {
+            listener = (OnThemeSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnHeadlineSelectedListener");
         }
-        else {
-            if(workingList.get(0).getListHirarchie().equals("comment")){
-                lastList = XMLFactory.getSubThemeList();
-                backButton.setClickable(true);
-            }
-            else if (workingList.get(0).getListHirarchie().equals("subTheme")){
-                lastList = XMLFactory.getThemeList();
-                backButton.setClickable(false);
-            }
-            else {}
-        }
-
-        customAdapter.goBack(lastList);
-         */
     }
 
-    private void activateBackSwipeRightLeft(View rootView) {
-        rootView.setOnTouchListener(new OnSwipeTouchListener(context) {
-            @Override
-            public void onSwipeLeft() {
-            }
 
+    /**
+     * sets variable to default
+     */
 
-            @Override
-            public void onSwipeRight() {
-                ArrayList<ThemeListItem> lastList = null;
-                ArrayList<ThemeListItem> workingList = customAdapter.getMyList();
-
-                if (workingList.isEmpty()) {
-                    lastList = XMLFactory.createTopic(context);
-                    System.out.println("Error: there is no item inside the subcatList so i cant load the" +
-                            "previous depending on the current list");
-                } else {
-                    if (workingList.get(0).getListHirarchie().equals("comment")) {
-                        lastList = XMLFactory.getSubThemeList();
-                    } else if (workingList.get(0).getListHirarchie().equals("subTheme")) {
-                        lastList = XMLFactory.getThemeList();
-                    } else {
-                    }
-                }
-
-                customAdapter.goBack(lastList);
-            }
-        });
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
     }
-
 }
+
+
 
 
