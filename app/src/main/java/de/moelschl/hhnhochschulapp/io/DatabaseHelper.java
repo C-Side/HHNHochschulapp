@@ -11,8 +11,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import de.moelschl.hhnhochschulapp.model.CommentListItem;
 import de.moelschl.hhnhochschulapp.model.ThemeListItem;
 import de.moelschl.hhnhochschulapp.model.ThreadListItem;
+import de.moelschl.hhnhochschulapp.tools.CommentAdapter;
 
 
 /**
@@ -123,11 +125,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         closeDatabase();
 
-        //prints out the data
-        for (ThemeListItem themeListItem: mList){
-            Log.w("OUTPUT", themeListItem.getTopic() + " and desc "+ themeListItem.getDescription());
-        }
-
         return mList;
     }
 
@@ -151,6 +148,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             int commentCount = cursor.getInt(5);
             listItem = new ThreadListItem(themeTopic, id, questionHeader, questionText,
                     userNickname, commentCount);
+            mList.add(listItem);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        closeDatabase();
+
+        return mList;
+    }
+
+    public ArrayList<CommentListItem> getCommentList(int navigationKEy){
+        CommentListItem listItem = null;
+        ArrayList<CommentListItem> mList = new ArrayList<>();
+        openDatabase();
+
+        final String QUERY = "SELECT * FROM comments " + "WHERE  comments.thread_id = '" + navigationKEy + "'";
+        //create a cursor who inspects a single row
+        Cursor cursor = mDatabase.rawQuery(QUERY, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            String answerText = cursor.getString(1);
+            String userNickname = cursor.getString(2);
+            listItem = new CommentListItem(answerText, userNickname );
             mList.add(listItem);
             cursor.moveToNext();
         }

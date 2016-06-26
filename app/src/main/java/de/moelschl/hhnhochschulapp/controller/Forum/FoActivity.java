@@ -97,17 +97,19 @@ public class FoActivity extends AppCompatActivity implements View.OnClickListene
         FoThreadFragment threadFragment = new FoThreadFragment();
         threadFragment.setNavigationKey(navigationKey);
         ft.replace(R.id.forum_list_fragment, threadFragment);
-        ft.addToBackStack(null);
+        ft.addToBackStack("tag");
         ft.commit();
 
     }
 
     @Override
-    public void onThreadClicked(int postition) {
+    public void onThreadClicked(int navigationKey) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.forum_list_fragment, new FoCommentFragment());
-        ft.addToBackStack(null);
+        FoCommentFragment commentFragment = new FoCommentFragment();
+        commentFragment.setNavigationKey(navigationKey);
+        ft.replace(R.id.forum_list_fragment, commentFragment);
+        ft.addToBackStack("tag");
         ft.commit();
     }
 }

@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
+import de.moelschl.hhnhochschulapp.model.ThreadListItem;
 import de.moelschl.hhnhochschulapp.tools.ThreadAdapter;
 
 /**
@@ -61,7 +62,9 @@ public class FoThreadFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        listener.onThreadClicked(position);
+        ThreadListItem threadListItem = (ThreadListItem) l.getAdapter().getItem(position);
+        int key = threadListItem.getId();
+        listener.onThreadClicked(key);
     }
 
     /**

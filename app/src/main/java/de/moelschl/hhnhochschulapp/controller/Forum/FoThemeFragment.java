@@ -95,7 +95,6 @@ public class FoThemeFragment extends ListFragment {
         }
     }
 
-
     /**
      * sets variable to default
      */
