@@ -9,4 +9,7 @@
     <string name="nachricht"></string>
     <string name="action_logout">Logout</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_ilias_tutorial1">IliasTutorial1Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

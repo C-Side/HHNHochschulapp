@@ -20,6 +20,7 @@ import de.moelschl.hhnhochschulapp.R;
 public class TutorialsFragment extends Fragment {
 
     private View myFragmentView;
+    public static String auswahl;
 
     @Nullable
     @Override
@@ -36,5 +37,16 @@ public class TutorialsFragment extends Fragment {
         ListView myListView = (ListView) myFragmentView.findViewById(R.id.listViewIlias);
         myListView.setAdapter(messageAdapter);
 
+        myListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        auswahl = String.valueOf(parent.getItemAtPosition(position));
+                        Intent intent = new Intent(getActivity(), IliasTutorial1Activity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
     }
 }

@@ -31,6 +31,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".controller.NachrichtActivity"></activity>
+        <activity
+            android:name=".controller.IliasTutorial1Activity"
+            android:label="@string/title_activity_ilias_tutorial1"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
