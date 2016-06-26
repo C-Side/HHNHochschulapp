@@ -19,6 +19,8 @@ import de.moelschl.hhnhochschulapp.tools.ThreadAdapter;
 public class FoThreadFragment extends ListFragment {
     private ThreadAdapter threadAdapter;
     private DatabaseHelper dbHelper;
+    private String navigationKey;
+
     private OnThemeSelectedListener listener;
     private Context context;
 
@@ -42,7 +44,7 @@ public class FoThreadFragment extends ListFragment {
 
         this.context = getContext();
         this.dbHelper = new DatabaseHelper(context);
-        //this.threadAdapter = new ThreadAdapter(getActivity(), dbHelper.getThreadList());
+        this.threadAdapter = new ThreadAdapter(getActivity(), dbHelper.getThreadList(navigationKey));
         setListAdapter(threadAdapter);
 
         return rootView;
@@ -98,5 +100,9 @@ public class FoThreadFragment extends ListFragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
+    }
+
+    public void setNavigationKey(String key){
+        this.navigationKey = key;
     }
 }

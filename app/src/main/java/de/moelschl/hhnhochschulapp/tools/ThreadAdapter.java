@@ -82,7 +82,7 @@ public class ThreadAdapter extends BaseAdapter{
         InfoViewHolder infoViewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(
-                    R.layout.fo_theme_row_layout, parent, false);
+                    R.layout.fo_threads_row_layout, parent, false);
             infoViewHolder = new InfoViewHolder(convertView);
             convertView.setTag(infoViewHolder);
         } else {
@@ -91,12 +91,10 @@ public class ThreadAdapter extends BaseAdapter{
 
         ThreadListItem listItem = getItem(position);
 
-        infoViewHolder.topicTitle.setText(listItem.getThemeTopic());
-        infoViewHolder.topicDesc.setText(listItem.getId());
-        infoViewHolder.topicTitle.setText(listItem.getQuestionHeader());
-        infoViewHolder.topicDesc.setText(listItem.getQuestionText());
-        infoViewHolder.topicTitle.setText(listItem.getUeserNickname());
-        infoViewHolder.topicDesc.setText(listItem.getCommentCount());
+        infoViewHolder.questionHeader.setText(listItem.getQuestionHeader());
+        infoViewHolder.questionText.setText(listItem.getQuestionText());
+        infoViewHolder.userNickname.setText(listItem.getUeserNickname());
+        infoViewHolder.commentCount.setText(String.valueOf(listItem.getCommentCount()));
 
         return convertView;
     }
@@ -107,13 +105,13 @@ public class ThreadAdapter extends BaseAdapter{
      */
 
     private class InfoViewHolder {
-        TextView topicTitle, topicDesc;
-        ImageView icon;
+        TextView questionHeader, questionText , userNickname, commentCount;
 
         public InfoViewHolder(View item) {
-            topicTitle = (TextView) item.findViewById(R.id.topicTitle);
-            topicDesc = (TextView) item.findViewById(R.id.topicDesc);
-            //icon = (ImageView) item.findViewById(R.id.goIcon);
+            questionHeader = (TextView) item.findViewById(R.id.questionheader);
+            questionText = (TextView) item.findViewById(R.id.questiontext);
+            userNickname = (TextView) item.findViewById(R.id.usernickname);
+            commentCount= (TextView) item.findViewById(R.id.commentCounter);
         }
     }
 }

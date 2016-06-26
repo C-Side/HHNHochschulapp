@@ -8,7 +8,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,12 +16,10 @@ import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 
 
-
 public class FoActivity extends AppCompatActivity implements View.OnClickListener,
-        FoThemeFragment.OnThemeSelectedListener, FoThreadFragment.OnThemeSelectedListener {
+        FoThemeFragment.OnThemeSelectedListener, FoThreadFragment.OnThemeSelectedListener{
 
     private DatabaseHelper mDBHelper;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +40,7 @@ public class FoActivity extends AppCompatActivity implements View.OnClickListene
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.forum_toolbar_fragment, new FoToolbarFragment());
         ft.add(R.id.forum_list_fragment, new FoThemeFragment());
+        ft.addToBackStack("tag");
         ft.commit();
 
         setTitle("Forum");
@@ -77,25 +75,40 @@ public class FoActivity extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    @Override
     public void onClick(View v) {
         System.out.println("penis");
     }
 
 
     @Override
-    public void onThemeClicked(int postition) {
-        Log.w("PRESSED", Integer.toString(postition));
+    public void onThemeClicked(String navigationKey) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.forum_list_fragment, new FoThreadFragment());
+        FoThreadFragment threadFragment = new FoThreadFragment();
+        threadFragment.setNavigationKey(navigationKey);
+        ft.replace(R.id.forum_list_fragment, threadFragment);
+        ft.addToBackStack(null);
+        ft.commit();
+
     }
 
     @Override
     public void onThreadClicked(int postition) {
-        Log.w("PRESSED", Integer.toString(postition));
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.forum_list_fragment, new FoCommentFragment());
+        ft.addToBackStack(null);
+        ft.commit();
     }
 }
 

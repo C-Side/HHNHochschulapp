@@ -1,6 +1,5 @@
 package de.moelschl.hhnhochschulapp.controller.Forum;
 
-import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -9,12 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import java.util.ArrayList;
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.model.ThemeListItem;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 import de.moelschl.hhnhochschulapp.tools.ThemeAdapter;
-import de.moelschl.hhnhochschulapp.tools.OnSwipeTouchListener;
 
 /**
  * this class provides a List Fragment which will be placed in a activity. It gets information of
@@ -66,7 +63,9 @@ public class FoThemeFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        listener.onThemeClicked(position);
+        ThemeListItem clickedItem = (ThemeListItem) l.getAdapter().getItem(position);
+        String navigationKey = clickedItem.getTopic();
+        listener.onThemeClicked(navigationKey);
     }
 
     /**
@@ -75,7 +74,7 @@ public class FoThemeFragment extends ListFragment {
      */
 
     public interface OnThemeSelectedListener {
-        void onThemeClicked(int postition);
+        void onThemeClicked(String navigationKey);
     }
 
     /**

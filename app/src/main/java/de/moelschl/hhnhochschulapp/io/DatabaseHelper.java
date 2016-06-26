@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 import de.moelschl.hhnhochschulapp.model.ThemeListItem;
+import de.moelschl.hhnhochschulapp.model.ThreadListItem;
 
 
 /**
@@ -107,8 +108,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<ThemeListItem> mList = new ArrayList<>();
         openDatabase();
 
+        final String QUERY = "SELECT * FROM expandedTheme";
         //create a cursor who inspects a single row
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM expandedTheme", null);
+        Cursor cursor = mDatabase.rawQuery(QUERY, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             String topic = cursor.getString(0);
@@ -125,6 +127,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (ThemeListItem themeListItem: mList){
             Log.w("OUTPUT", themeListItem.getTopic() + " and desc "+ themeListItem.getDescription());
         }
+
+        return mList;
+    }
+
+    public ArrayList<ThreadListItem> getThreadList(String navigationKEy){
+        ThreadListItem listItem = null;
+        ArrayList<ThreadListItem> mList = new ArrayList<>();
+        openDatabase();
+
+        final String QUERY = "SELECT * FROM expandedThread "
+                +"WHERE expandedThread.theme_topic = '" + navigationKEy + "'";
+
+        //create a cursor who inspects a single row
+        Cursor cursor = mDatabase.rawQuery(QUERY, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            String themeTopic = cursor.getString(0);
+            int id = cursor.getInt(1);
+            String questionHeader = cursor.getString(2);
+            String questionText = cursor.getString(3);
+            String userNickname = cursor.getString(4);
+            int commentCount = cursor.getInt(5);
+            listItem = new ThreadListItem(themeTopic, id, questionHeader, questionText,
+                    userNickname, commentCount);
+            mList.add(listItem);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        closeDatabase();
 
         return mList;
     }

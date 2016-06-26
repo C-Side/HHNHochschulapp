@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/threadCounter"
@@ -37,5 +36,14 @@
             android:padding="5dp"
             android:text="Description" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/item_divider_theme_top"
+        android:layout_width= "fill_parent"
+        android:layout_height="1.5dp"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentTop="true"
+        />
+
 
 </RelativeLayout>
