@@ -68,13 +68,11 @@ public class FoActivity extends AppCompatActivity implements View.OnClickListene
                 return;
             }
         }
-
-        //mDBHelper.getListOut();
     }
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
+        if (getFragmentManager().getBackStackEntryCount() > 1) {
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
@@ -101,11 +99,12 @@ public class FoActivity extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
-    public void onThreadClicked(int navigationKey) {
+    public void onThreadClicked(int navigationKey, String question) {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         FoCommentFragment commentFragment = new FoCommentFragment();
         commentFragment.setNavigationKey(navigationKey);
+        commentFragment.setQuestionText(question);
         ft.replace(R.id.forum_list_fragment, commentFragment);
         ft.addToBackStack("tag");
         ft.commit();

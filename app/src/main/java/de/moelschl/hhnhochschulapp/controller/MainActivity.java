@@ -64,7 +64,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else if (getFragmentManager().getBackStackEntryCount() > 1) {
+            getFragmentManager().popBackStack();
+        }
+        else {
             super.onBackPressed();
         }
     }
@@ -211,7 +215,8 @@ public class MainActivity extends AppCompatActivity
     //    fm.beginTransaction().replace(R.id.content_frame, new IliasFragment()).commit();
     //    setAppbar()
     //    setTitle("Ilias");
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://ilias.hs-heilbronn.de/login.php?target=&soap_pw=&ext_uid=&cookies=nocookies&client_id=hshn&lang=de"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("https://ilias.hs-heilbronn.de/login.php?target=&soap_pw=&ext_uid=&cookies=nocookies&client_id=hshn&lang=de"));
         startActivity(browserIntent);
     }
 
@@ -234,15 +239,14 @@ public class MainActivity extends AppCompatActivity
         startActivity(browserIntent);
     }
 
+
+    /**
+     * opens the Forum activity
+     *
+     */
+
     private void openForum(){
         startActivity(new Intent(MainActivity.this, FoActivity.class));
-
-        /**
-        android.app.FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, new FoThemeFragment()).commit();
-         setAppbar()
-         */
-        //setTitle("Forum");
     }
 
     private void openTutorial(){
@@ -254,6 +258,12 @@ public class MainActivity extends AppCompatActivity
         setAppbar();
         setTitle("Tutorial");
     }
+
+
+    /**
+     * sets the icons of the app bar
+     *
+     */
 
     private void setAppbar(){
         DrawableCompat.setTint(einstellungenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));

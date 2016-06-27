@@ -64,7 +64,8 @@ public class FoThreadFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         ThreadListItem threadListItem = (ThreadListItem) l.getAdapter().getItem(position);
         int key = threadListItem.getId();
-        listener.onThreadClicked(key);
+        String question = threadListItem.getQuestionText();
+        listener.onThreadClicked(key, question);
     }
 
     /**
@@ -73,7 +74,7 @@ public class FoThreadFragment extends ListFragment {
      */
 
     public interface OnThemeSelectedListener {
-        void onThreadClicked(int postition);
+        void onThreadClicked(int postition, String question);
     }
 
     /**
