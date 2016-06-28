@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import de.moelschl.hhnhochschulapp.R;
@@ -17,7 +18,7 @@ import de.moelschl.hhnhochschulapp.tools.ThreadAdapter;
 /**
  * Created by Hasbert on 24.06.2016.
  */
-public class FoThreadFragment extends ListFragment {
+public class FoThreadFragment extends ListFragment implements View.OnClickListener{
     private ThreadAdapter threadAdapter;
     private DatabaseHelper dbHelper;
     private String navigationKey;
@@ -41,7 +42,9 @@ public class FoThreadFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fo_threads_fragment, container, false);
-        //activateBackSwipeRightLeft(rootView);
+
+        Button newQuestion = (Button) rootView.findViewById(R.id.new_question_button);
+        newQuestion.setOnClickListener(this);
 
         this.context = getContext();
         this.dbHelper = new DatabaseHelper(context);
@@ -50,6 +53,27 @@ public class FoThreadFragment extends ListFragment {
 
         return rootView;
     }
+
+    /**
+     * Interface to communicate with the activity
+     *
+     */
+
+    public interface OnThemeSelectedListener {
+        void onThreadClicked(int postition, String question);
+        void onNewQuestionClick();
+    }
+
+    /**
+     *
+     * @param v
+     */
+
+    @Override
+    public void onClick(View v) {
+        listener.onNewQuestionClick();
+    }
+
 
     /**
      * calles the inner class method onThemeClicked and gives the activity the full control
@@ -68,14 +92,7 @@ public class FoThreadFragment extends ListFragment {
         listener.onThreadClicked(key, question);
     }
 
-    /**
-     * Interface to communicate with the activity
-     *
-     */
 
-    public interface OnThemeSelectedListener {
-        void onThreadClicked(int postition, String question);
-    }
 
     /**
      * checks that the activity has implemaentated OnThemeSelectedListener
@@ -106,6 +123,10 @@ public class FoThreadFragment extends ListFragment {
         listener = null;
     }
 
+    /**
+     *
+     * @param key
+     */
     public void setNavigationKey(String key){
         this.navigationKey = key;
     }

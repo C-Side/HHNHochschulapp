@@ -1,20 +1,18 @@
 package de.moelschl.hhnhochschulapp.io;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
 import de.moelschl.hhnhochschulapp.model.CommentListItem;
 import de.moelschl.hhnhochschulapp.model.ThemeListItem;
 import de.moelschl.hhnhochschulapp.model.ThreadListItem;
-import de.moelschl.hhnhochschulapp.tools.CommentAdapter;
 
 
 /**
@@ -94,7 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void closeDatabase(){
         if(mDatabase != null){
-            mDatabase.close();
+            this.close();
         }
     }
 
@@ -133,8 +131,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<ThreadListItem> mList = new ArrayList<>();
         openDatabase();
 
-        final String QUERY = "SELECT * FROM expandedThread "
-                +"WHERE expandedThread.theme_topic = '" + navigationKEy + "'";
+        final String QUERY =
+                "SELECT thread.theme_topic, thread.id, thread.questionHeader, thread.questionText, " +
+                        "thread.user_nickname " +
+                "COUNT (thread.id) AS threads " +
+                "FROM thread, comments " +
+                "WHERE thread.id = comments.thread_id " +
+                "AND thread.theme_topic = '" + navigationKEy + "' " +
+                "GROUP BY thread.theme_topic, thread.id, thread.questionHeader, thread.questionText, " +
+                        "thread.user_nickname) ";
 
         //create a cursor who inspects a single row
         Cursor cursor = mDatabase.rawQuery(QUERY, null);
@@ -177,5 +182,66 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         closeDatabase();
 
         return mList;
+    }
+
+    public String getDescByTopic(String text){
+
+        openDatabase();
+
+        final String QUERY = "SELECT theme.description FROM theme " +
+                "WHERE  theme.topic = '" + text + "'";
+        //create a cursor who inspects a single row
+        Cursor cursor = mDatabase.rawQuery(QUERY, null);
+        cursor.moveToFirst();
+        String description = cursor.getString(0);
+
+        cursor.close();
+        closeDatabase();
+
+        return description;
+    }
+
+    public void addQuestionToDatabase(String themeTopic, String themeDesc, String questionHeader,
+                                      String question, Context context){
+
+        //DatabaseHelper dbHelper = new DatabaseHelper(mContext);
+        //insert into table thread
+        //unbedingt final variablen nehmen! + user erstellen dann user nickname eintragen
+        ContentValues threadContentValues = new ContentValues();
+        threadContentValues.put("theme_topic", themeTopic);
+        threadContentValues.put("questionHeader", questionHeader);
+        threadContentValues.put("questionText", question);
+        threadContentValues.put("user_nickname", "aForeignStranger");
+
+        //performs the insertions
+        openDatabase();
+            if (isNotInList(themeTopic)){
+                //insert into table theme
+                ContentValues themeContentValues = new ContentValues();
+                themeContentValues.put("topic", themeTopic);
+                themeContentValues.put("description", themeDesc);
+
+                //insertions
+                mDatabase.insert("thread", null, threadContentValues);
+                mDatabase.insert("theme", null, themeContentValues);
+            }
+            else {
+                mDatabase.insert("thread", null, threadContentValues);
+            }
+            closeDatabase();
+    }
+
+    private boolean isNotInList(String key) {
+        boolean inList = true;
+        for (ThemeListItem listItem : getThemeList()) {
+            if(listItem.getTopic().equals(key)){
+                inList = false;
+                return inList;
+            }
+            else {
+                inList = true;
+            }
+        }
+        return inList;
     }
 }

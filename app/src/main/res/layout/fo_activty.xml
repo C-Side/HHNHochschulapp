@@ -16,11 +16,6 @@
         android:layout_alignParentTop="true">
     </fragment>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Neu"
-        android:id="@+id/newItem" />
 
     <FrameLayout
         android:id="@+id/forum_list_fragment"

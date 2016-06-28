@@ -1,23 +1,23 @@
 package de.moelschl.hhnhochschulapp.controller.Forum;
 
-/**
- * Created by Hasbert on 21.06.2016.
- */
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import java.io.File;
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
+import de.moelschl.hhnhochschulapp.tools.CustomAutoCompleteView;
 
-
-public class FoActivity extends AppCompatActivity implements View.OnClickListener,
-        FoThemeFragment.OnThemeSelectedListener, FoThreadFragment.OnThemeSelectedListener{
+/**
+ * Created by Hasbert on 21.06.2016.
+ */
+public class FoActivity extends AppCompatActivity implements FoThemeFragment.OnThemeSelectedListener,
+        FoThreadFragment.OnThemeSelectedListener, CustomAutoCompleteView.OnThemeChooseListener{
 
     private DatabaseHelper mDBHelper;
 
@@ -30,9 +30,6 @@ public class FoActivity extends AppCompatActivity implements View.OnClickListene
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_forum);
         setSupportActionBar(toolbar);
-
-        Button newThemeButton = (Button) findViewById(R.id.newItem);
-        newThemeButton.setOnClickListener(this);
 
         initDatabase();
 
@@ -70,6 +67,26 @@ public class FoActivity extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    /**
+     * a helper method to replace the current Frgament with a new Fragment.
+     *
+     * @param newFragment the next fragment
+     */
+
+    private void switchFragment(Fragment newFragment){
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.forum_list_fragment, newFragment);
+        ft.addToBackStack("tag");
+        ft.commit();
+    }
+
+
+    /**
+     * switches back to the last fragment when the back button is pressed
+     *
+     */
+
     @Override
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() > 1) {
@@ -80,35 +97,63 @@ public class FoActivity extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    @Override
-    public void onClick(View v) {
-        System.out.println("penis");
-    }
-
+    /**
+     *
+     * @param navigationKey
+     */
 
     @Override
     public void onThemeClicked(String navigationKey) {
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
         FoThreadFragment threadFragment = new FoThreadFragment();
         threadFragment.setNavigationKey(navigationKey);
-        ft.replace(R.id.forum_list_fragment, threadFragment);
-        ft.addToBackStack("tag");
-        ft.commit();
-
+        switchFragment(threadFragment);
     }
+
+
+    /**
+     *
+     * @param navigationKey
+     * @param question
+     */
 
     @Override
     public void onThreadClicked(int navigationKey, String question) {
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
         FoCommentFragment commentFragment = new FoCommentFragment();
         commentFragment.setNavigationKey(navigationKey);
         commentFragment.setQuestionText(question);
-        ft.replace(R.id.forum_list_fragment, commentFragment);
-        ft.addToBackStack("tag");
-        ft.commit();
+        switchFragment(commentFragment);
+
     }
+
+
+    /**
+     *
+     */
+
+    @Override
+    public void onNewQuestionClick() {
+        FoQuestionAdder questionFragment = new FoQuestionAdder();
+        switchFragment(questionFragment);
+    }
+
+    @Override
+    public void onChoosen(String text) {
+        EditText themeDesc = (EditText) findViewById(R.id.theme_desc_text);
+        String description = mDBHelper.getDescByTopic(text);
+        themeDesc.setText(description);
+    }
+
+
+    /**
+     *
+
+
+    @Override
+    public void onNewAnswerClick() {
+        FoCommentAdder commentAdderFragment = new FoCommentAdder();
+        switchFragment(commentAdderFragment);
+    }
+    */
 }
 
 
