@@ -10,6 +10,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import de.moelschl.hhnhochschulapp.model.CommentListItem;
 import de.moelschl.hhnhochschulapp.model.ThemeListItem;
 import de.moelschl.hhnhochschulapp.model.ThreadListItem;
@@ -128,38 +130,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<ThreadListItem> getThreadList(String navigationKEy){
         ThreadListItem listItem = null;
-        ArrayList<ThreadListItem> mList = new ArrayList<>();
+        ArrayList<ThreadListItem> threadList = new ArrayList<>();
+        int commentCount = 0;
+
+        //opens the dataBase and starts connection
         openDatabase();
 
+        HashMap<Integer, Integer> comCount = getCount(mDatabase);
         final String QUERY =
-                "SELECT thread.theme_topic, thread.id, thread.questionHeader, thread.questionText, " +
-                        "thread.user_nickname " +
-                "COUNT (thread.id) AS threads " +
-                "FROM thread, comments " +
-                "WHERE thread.id = comments.thread_id " +
-                "AND thread.theme_topic = '" + navigationKEy + "' " +
-                "GROUP BY thread.theme_topic, thread.id, thread.questionHeader, thread.questionText, " +
-                        "thread.user_nickname) ";
+                "SELECT * " +
+                        "FROM thread " +
+                        "WHERE thread.theme_topic = '" + navigationKEy + "'";
 
         //create a cursor who inspects a single row
         Cursor cursor = mDatabase.rawQuery(QUERY, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            String themeTopic = cursor.getString(0);
-            int id = cursor.getInt(1);
+            int id = cursor.getInt(0);
+            String themeTopic = cursor.getString(1);
             String questionHeader = cursor.getString(2);
             String questionText = cursor.getString(3);
             String userNickname = cursor.getString(4);
-            int commentCount = cursor.getInt(5);
+
+            //checks if the key is in the hashmap with comment values
+            if (comCount.containsKey(id))commentCount = comCount.get(id);
+            else commentCount = 0;
+            //if not 0 gets stored in the item
             listItem = new ThreadListItem(themeTopic, id, questionHeader, questionText,
                     userNickname, commentCount);
-            mList.add(listItem);
+            threadList.add(listItem);
             cursor.moveToNext();
         }
         cursor.close();
         closeDatabase();
 
-        return mList;
+        return threadList;
+    }
+
+    private HashMap getCount(SQLiteDatabase mDatabase){
+
+        HashMap<Integer, Integer> hash = new HashMap<>();
+        final String COUNT_QUERY = " SELECT thread.id, COUNT (comments.answer_text)\n" +
+                " FROM thread JOIN comments ON thread.id = comments.thread_id\n" +
+                " GROUP BY thread.id";
+        Cursor countCursor = mDatabase.rawQuery(COUNT_QUERY, null);
+        countCursor.moveToFirst();
+
+        while (!countCursor.isAfterLast()){
+            hash.put(countCursor.getInt(0), countCursor.getInt(1));
+            countCursor.moveToNext();
+        }
+        countCursor.close();
+
+        return hash;
     }
 
     public ArrayList<CommentListItem> getCommentList(int navigationKEy){
@@ -174,7 +197,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()){
             String answerText = cursor.getString(1);
             String userNickname = cursor.getString(2);
-            listItem = new CommentListItem(answerText, userNickname );
+            listItem = new CommentListItem(answerText, userNickname);
             mList.add(listItem);
             cursor.moveToNext();
         }
@@ -244,4 +267,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return inList;
     }
+
+
 }

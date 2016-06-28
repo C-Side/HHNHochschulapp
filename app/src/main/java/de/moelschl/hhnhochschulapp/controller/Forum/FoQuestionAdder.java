@@ -92,7 +92,7 @@ public class FoQuestionAdder extends Fragment implements View.OnClickListener{
         String themeDesc = this.themeDesc.getText().toString();
         String questionHeader = this.questionHeader.getText().toString();
         String question = this.question.getText().toString();
-        String nuller = null;
+        String nuller = "";
 
         if (themeTopic.equals(nuller) || themeDesc.equals(nuller) || questionHeader.equals(nuller)
                 || question.equals(nuller)){

@@ -150,7 +150,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
+            android:text="SAVE"
             android:id="@+id/save_button_question"
             android:layout_gravity="bottom|center_horizontal"
             android:padding="10dp" />
