@@ -21,11 +21,24 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
+            android:id="@+id/question_header_com"
+            android:padding="15dp"
+            android:ellipsize="marquee"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_corner"
+            android:textColor="@color/abc_background_cache_hint_selector_material_dark" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
             android:id="@+id/question_text_com"
             android:padding="15dp"
             android:ellipsize="marquee"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_corner" />
+
     </LinearLayout>
 
     <Space

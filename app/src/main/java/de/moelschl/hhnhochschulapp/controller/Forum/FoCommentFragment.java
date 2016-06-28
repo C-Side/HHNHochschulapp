@@ -26,6 +26,7 @@ public class FoCommentFragment extends ListFragment implements View.OnClickListe
     private DatabaseHelper dbHelper;
     private int navigationKey;
     private String questionText;
+    private String questionHeader;
 
     private Context context;
 
@@ -46,8 +47,11 @@ public class FoCommentFragment extends ListFragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fo_comment_fragment, container, false);
 
-        TextView questiontext = (TextView) rootView.findViewById(R.id.question_text_com);
-        questiontext.setText(questionText);
+        TextView questionHeaderView = (TextView) rootView.findViewById(R.id.question_header_com);
+        questionHeaderView.setText(questionHeader);
+
+        TextView questionTextView = (TextView) rootView.findViewById(R.id.question_text_com);
+        questionTextView.setText(questionText);
 
         Button answerButton = (Button) rootView.findViewById(R.id.newcomment);
         answerButton.setOnClickListener(this);
@@ -79,6 +83,16 @@ public class FoCommentFragment extends ListFragment implements View.OnClickListe
 
     public void setQuestionText(String question){
         this.questionText = question;
+    }
+
+    /**
+     * sets the navigation key to navigate to the right comments inside the database
+     *
+     * @param questionHeader the question
+     */
+
+    public void setQuestionHeader(String questionHeader){
+        this.questionHeader = questionHeader;
     }
 
     /**

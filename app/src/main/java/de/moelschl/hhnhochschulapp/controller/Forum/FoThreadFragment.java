@@ -60,7 +60,7 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
      */
 
     public interface OnThemeSelectedListener {
-        void onThreadClicked(int postition, String question);
+        void onThreadClicked(int postition, String question, String questionHeader);
         void onNewQuestionClick();
     }
 
@@ -89,7 +89,8 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
         ThreadListItem threadListItem = (ThreadListItem) l.getAdapter().getItem(position);
         int key = threadListItem.getId();
         String question = threadListItem.getQuestionText();
-        listener.onThreadClicked(key, question);
+        String questionHeader = threadListItem.getQuestionHeader();
+        listener.onThreadClicked(key, question, questionHeader);
     }
 
 

@@ -117,12 +117,12 @@ public class FoActivity extends AppCompatActivity implements FoThemeFragment.OnT
      */
 
     @Override
-    public void onThreadClicked(int navigationKey, String question) {
+    public void onThreadClicked(int navigationKey, String question, String questionHeader) {
         FoCommentFragment commentFragment = new FoCommentFragment();
         commentFragment.setNavigationKey(navigationKey);
         commentFragment.setQuestionText(question);
+        commentFragment.setQuestionHeader(questionHeader);
         switchFragment(commentFragment);
-
     }
 
 
