@@ -251,7 +251,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             else {
                 mDatabase.insert("thread", null, threadContentValues);
             }
-            closeDatabase();
+        closeDatabase();
     }
 
     private boolean isNotInList(String key) {
@@ -268,5 +268,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return inList;
     }
 
+    public void addAnswerToComment(int id, String answer){
+        ContentValues answerContent = new ContentValues();
+        answerContent.put("thread_id", id);
+        answerContent.put("answer_Text", answer);
+        answerContent.put("user_nickname", "aForeignStranger");
+
+        //opens Database and inserts the data
+        openDatabase();
+            mDatabase.insert("comments", null, answerContent);
+        closeDatabase();
+    }
 
 }

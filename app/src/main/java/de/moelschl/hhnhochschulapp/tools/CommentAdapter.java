@@ -36,6 +36,11 @@ public class CommentAdapter extends BaseAdapter{
         this.context = context;
     }
 
+    public void refresh(ArrayList<CommentListItem> comments){
+        workingList = comments;
+        notifyDataSetChanged();
+    }
+
     /**
      * getter for the list size
      * @return listsize

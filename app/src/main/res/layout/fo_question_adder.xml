@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Deine Frage:"
+                android:text="Betreff:"
                 android:id="@+id/question_header_desc"
                 android:paddingBottom="10dp"
                 android:paddingRight="10dp"

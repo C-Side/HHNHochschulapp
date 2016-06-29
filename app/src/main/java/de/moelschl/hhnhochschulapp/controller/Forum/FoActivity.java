@@ -3,12 +3,16 @@ package de.moelschl.hhnhochschulapp.controller.Forum;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.Toast;
 import java.io.File;
+import java.util.Locale;
+import java.util.Stack;
+
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 import de.moelschl.hhnhochschulapp.tools.CustomAutoCompleteView;
@@ -17,9 +21,12 @@ import de.moelschl.hhnhochschulapp.tools.CustomAutoCompleteView;
  * Created by Hasbert on 21.06.2016.
  */
 public class FoActivity extends AppCompatActivity implements FoThemeFragment.OnThemeSelectedListener,
-        FoThreadFragment.OnThemeSelectedListener, CustomAutoCompleteView.OnThemeChooseListener{
+        FoThreadFragment.OnThemeSelectedListener, CustomAutoCompleteView.OnThemeChooseListener,
+        FoQuestionAdder.OnStoreData{
 
     private DatabaseHelper mDBHelper;
+    private Stack<String> titleStack;
+    private int stackWatcher = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,8 @@ public class FoActivity extends AppCompatActivity implements FoThemeFragment.OnT
         ft.addToBackStack("tag");
         ft.commit();
 
-        setTitle("Forum");
+        titleStack = new Stack<>();
+        setTitle("Themen");
     }
 
 
@@ -91,6 +99,7 @@ public class FoActivity extends AppCompatActivity implements FoThemeFragment.OnT
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() > 1) {
             getFragmentManager().popBackStack();
+            popTitleStack();
         } else {
             super.onBackPressed();
         }
@@ -107,6 +116,7 @@ public class FoActivity extends AppCompatActivity implements FoThemeFragment.OnT
         FoThreadFragment threadFragment = new FoThreadFragment();
         threadFragment.setNavigationKey(navigationKey);
         switchFragment(threadFragment);
+        addToTitleStack(firstToUpperCase(navigationKey));
     }
 
 
@@ -120,9 +130,9 @@ public class FoActivity extends AppCompatActivity implements FoThemeFragment.OnT
     public void onThreadClicked(int navigationKey, String question, String questionHeader) {
         FoCommentFragment commentFragment = new FoCommentFragment();
         commentFragment.setNavigationKey(navigationKey);
-        commentFragment.setQuestionText(question);
-        commentFragment.setQuestionHeader(questionHeader);
+        commentFragment.setQuestion(question, questionHeader);
         switchFragment(commentFragment);
+        addToTitleStack("Kommentare");
     }
 
 
@@ -136,24 +146,74 @@ public class FoActivity extends AppCompatActivity implements FoThemeFragment.OnT
         switchFragment(questionFragment);
     }
 
+
+    /**
+     *
+     * @param text
+     */
+
     @Override
-    public void onChoosen(String text) {
+    public void onDropDownItemClick(String text) {
         EditText themeDesc = (EditText) findViewById(R.id.theme_desc_text);
         String description = mDBHelper.getDescByTopic(text);
         themeDesc.setText(description);
     }
 
-
     /**
      *
-
+     *
+     * @param themeTopic
+     * @param themeDesc
+     * @param questionHeader
+     * @param question
+     * @param context
+     */
 
     @Override
-    public void onNewAnswerClick() {
-        FoCommentAdder commentAdderFragment = new FoCommentAdder();
-        switchFragment(commentAdderFragment);
+    public void storeNewQuestion(String themeTopic, String themeDesc, String questionHeader, String question, Context context) {
+        mDBHelper.addQuestionToDatabase(themeTopic, themeDesc, questionHeader, question, context);
+        onBackPressed();
     }
-    */
+
+    /**
+     * makes the first letter of a String to Upper case
+     *
+     */
+
+    private String firstToUpperCase(String word) {
+        String upperLetter = word.substring(0,1).toUpperCase();
+        return upperLetter.concat(word.substring(1,word.length()));
+    }
+
+
+    /**
+     * a simple stack to pop title strings from
+     * ok not that simple =D
+     *
+     */
+
+    private void popTitleStack() {
+        if (stackWatcher == 1){
+            String title = "Themen";
+            titleStack.push(title);
+            setTitle(title);
+        }
+        setTitle(titleStack.pop());
+        stackWatcher --;
+    }
+
+
+    /**
+     * a simple stack to push title strings to
+     *
+     */
+
+    private void addToTitleStack(String title){
+        if (stackWatcher == 1){}
+        else titleStack.push(title);
+        setTitle(title);
+        stackWatcher++;
+    }
 }
 
 

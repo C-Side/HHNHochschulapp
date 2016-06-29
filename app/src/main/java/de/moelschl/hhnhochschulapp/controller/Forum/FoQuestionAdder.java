@@ -1,6 +1,7 @@
 package de.moelschl.hhnhochschulapp.controller.Forum;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
@@ -21,6 +24,7 @@ import de.moelschl.hhnhochschulapp.tools.CustomAutoCompleteView;
 
 public class FoQuestionAdder extends Fragment implements View.OnClickListener{
 
+    private OnStoreData dataOutput;
     private CustomAutoCompleteView textAutoComplete;
     private ArrayAdapter<String> adapter;
 
@@ -96,10 +100,44 @@ public class FoQuestionAdder extends Fragment implements View.OnClickListener{
 
         if (themeTopic.equals(nuller) || themeDesc.equals(nuller) || questionHeader.equals(nuller)
                 || question.equals(nuller)){
-            //popup nicht weiter gehen!
+            Toast.makeText(context, "Bitte alle Felder ausfüllen", Toast.LENGTH_SHORT).show();
         }
         else {
-            dbHelper.addQuestionToDatabase(themeTopic, themeDesc, questionHeader, question, context);
+            dataOutput.storeNewQuestion(themeTopic, themeDesc, questionHeader, question, context);
         }
+    }
+
+    public interface OnStoreData{
+        void storeNewQuestion(String themeTopic,String themeDesc,String questionHeader,
+                              String question,Context context);
+    }
+
+    /**
+     * checks that the activity has implemaentated OnThemeSelectedListener
+     *
+     * @param context {@link android.content.Context}
+     */
+
+    @Override
+    public void onAttach(Context context) {
+
+        super.onAttach(context);
+        try {
+            dataOutput = (OnStoreData) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+    }
+
+
+    /**
+     * sets variable to default
+     */
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        dataOutput = null;
     }
 }

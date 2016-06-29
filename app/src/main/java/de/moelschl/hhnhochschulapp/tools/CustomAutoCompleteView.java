@@ -40,13 +40,13 @@ public class CustomAutoCompleteView extends AutoCompleteTextView {
 
     @Override
     protected void replaceText(final CharSequence text) {
-        listener.onChoosen(text.toString());
+        listener.onDropDownItemClick(text.toString());
         super.replaceText(text);
 
     }
 
     public interface OnThemeChooseListener{
-        void onChoosen(String text);
+        void onDropDownItemClick(String text);
     }
 
     /**
