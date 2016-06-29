@@ -144,7 +144,9 @@
                 android:layout_marginRight="10dp"
                 android:textColor="#808080"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp" />
+                android:paddingRight="10dp"
+                android:textAlignment="textStart"
+                android:gravity="start" />
         </LinearLayout>
 
         <Button
