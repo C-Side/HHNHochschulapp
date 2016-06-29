@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.Toast;
 import java.io.File;
-import java.util.Locale;
 import java.util.Stack;
 
 import de.moelschl.hhnhochschulapp.R;

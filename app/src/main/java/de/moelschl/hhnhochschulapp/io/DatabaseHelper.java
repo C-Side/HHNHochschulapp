@@ -224,6 +224,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return description;
     }
 
+    public String getPasswordByUsername(String username){
+        openDatabase();
+        String password = null;
+        final String QUERY = "SELECT user.password FROM user " +
+                "WHERE user.nickname = '" + username + "'";
+        //create a cursor who inspects a single row
+        Cursor cursor = mDatabase.rawQuery(QUERY, null);
+        if (cursor.moveToFirst()){
+            password = cursor.getString(cursor.getColumnIndex("password"));
+            cursor.close();
+        }
+
+        closeDatabase();
+
+        return password;
+    }
+
     public void addQuestionToDatabase(String themeTopic, String themeDesc, String questionHeader,
                                       String question, Context context){
 
