@@ -15,6 +15,7 @@ import java.util.HashMap;
 import de.moelschl.hhnhochschulapp.model.CommentListItem;
 import de.moelschl.hhnhochschulapp.model.ThemeListItem;
 import de.moelschl.hhnhochschulapp.model.ThreadListItem;
+import de.moelschl.hhnhochschulapp.model.User;
 
 
 /**
@@ -235,7 +236,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             password = cursor.getString(cursor.getColumnIndex("password"));
             cursor.close();
         }
-
         closeDatabase();
 
         return password;
@@ -251,7 +251,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         threadContentValues.put("theme_topic", themeTopic);
         threadContentValues.put("questionHeader", questionHeader);
         threadContentValues.put("questionText", question);
-        threadContentValues.put("user_nickname", "aForeignStranger");
+        threadContentValues.put("user_nickname", User.getUsername());
 
         //performs the insertions
         openDatabase();
@@ -289,7 +289,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues answerContent = new ContentValues();
         answerContent.put("thread_id", id);
         answerContent.put("answer_Text", answer);
-        answerContent.put("user_nickname", "aForeignStranger");
+        answerContent.put("user_nickname", User.getUsername());
 
         //opens Database and inserts the data
         openDatabase();

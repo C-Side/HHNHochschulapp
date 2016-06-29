@@ -1,5 +1,6 @@
 package de.moelschl.hhnhochschulapp.controller;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import java.io.File;
 
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
+import de.moelschl.hhnhochschulapp.model.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -92,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final String USER_PASSWORD = dbHelper.getPasswordByUsername(filledInUserName);
         if (filledInPassword.equals(USER_PASSWORD)){
             authentification = true;
+            User.setUsername(filledInUserName);
         }
         return authentification;
     }

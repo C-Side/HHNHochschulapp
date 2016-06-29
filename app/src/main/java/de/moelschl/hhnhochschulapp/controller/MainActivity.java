@@ -1,6 +1,7 @@
 package de.moelschl.hhnhochschulapp.controller;
 
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -125,6 +126,21 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
+    /**
+     * switches the Fragment
+     *
+     * @param newFragment the new Fragment wich should be shown
+     */
+
+    private void switchFragment(Fragment newFragment){
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.content_frame, newFragment);
+        ft.addToBackStack("tag");
+        ft.commit();
+    }
+
     private void setAllImageListeners() {
 
 
@@ -181,60 +197,40 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void openKalender(){
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_frame, new KalenderFragment());
-        ft.addToBackStack("tag");
-        ft.commit();
+        KalenderFragment kalenderFragment = new KalenderFragment();
+        switchFragment(kalenderFragment);
         setAppbar();
         setTitle("Kalender");
     }
 
     private void openHome(){
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_frame, new HomeFragment());
-        ft.addToBackStack("tag");
-        ft.commit();
+        HomeFragment homeFragment = new HomeFragment();
+        switchFragment(homeFragment);
         setAppbar();
         setTitle("HHN Hochschulapp");
     }
 
     private void openBenachrichtigungen(){
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_frame, new BenachrichtigungenFragment());
-        ft.addToBackStack("tag");
-        ft.commit();
+        BenachrichtigungenFragment benachrichtigungenFragment = new BenachrichtigungenFragment();
+        switchFragment(benachrichtigungenFragment);
         setAppbar();
         setTitle("Benachrichtigungen");
     }
 
     private void openIlias(){
-    //    android.app.FragmentManager fm = getFragmentManager();
-    //    fm.beginTransaction().replace(R.id.content_frame, new IliasFragment()).commit();
-    //    setAppbar()
-    //    setTitle("Ilias");
         Intent browserIntent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://ilias.hs-heilbronn.de/login.php?target=&soap_pw=&ext_uid=&cookies=nocookies&client_id=hshn&lang=de"));
         startActivity(browserIntent);
     }
 
     private void openEinstellungen(){
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_frame, new EinstellungenFragment());
-        ft.addToBackStack("tag");
-        ft.commit();
+        EinstellungenFragment einstellungenFragment = new EinstellungenFragment();
+        switchFragment(einstellungenFragment);
         setAppbar();
         setTitle("Einstellungen");
     }
 
     private void openLinda(){
-    //    android.app.FragmentManager fm = getFragmentManager();
-    //    fm.beginTransaction().replace(R.id.content_frame, new LindaFragment()).commit();
-    //    setAppbar()
-    //    setTitle("Linda");
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://linda.hs-heilbronn.de/"));
         startActivity(browserIntent);
     }
@@ -250,11 +246,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void openTutorial(){
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_frame, new TutorialsFragment());
-        ft.addToBackStack("tag");
-        ft.commit();
+        TutorialsFragment tutorialsFragment = new TutorialsFragment();
+        switchFragment(tutorialsFragment);
         setAppbar();
         setTitle("Tutorial");
     }
