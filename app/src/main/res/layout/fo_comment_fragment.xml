@@ -50,8 +50,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/comment_anwer_field"
-                android:textColor="#ffffff" />
+                android:id="@+id/comment_anwer_field" />
 
             <Space
                 android:layout_width="fill_parent"
