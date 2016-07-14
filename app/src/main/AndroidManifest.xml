@@ -12,8 +12,10 @@
         android:theme="@style/AppTheme">
 
 
+
+
         <activity
-            android:name=".controller.LoginActivity"
+            android:name=".controller.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,14 +26,33 @@
         </activity>
 
         <activity
-            android:name=".controller.MainActivity"
+            android:name=".controller.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
 
         <activity
             android:name=".controller.IliasTutorial1Activity"
             android:label="@string/title_activity_ilias_tutorial1"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".controller.IliasTutorial2Activity"
+            android:label="@string/title_activity_ilias_tutorial2"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".controller.LindaTutorial1Activity"
+            android:label="@string/title_activity_linda_tutorial1"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".controller.LindaTutorial2Activity"
+            android:label="@string/title_activity_linda_tutorial2"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 

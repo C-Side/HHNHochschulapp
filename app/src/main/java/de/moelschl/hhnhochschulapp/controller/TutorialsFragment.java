@@ -33,18 +33,48 @@ public class TutorialsFragment extends Fragment {
 
     private void initListViewIlias() {
         String[] iliasTutorials = {"Ilias-Kurse beitreten", "Ilias-Kurse verlassen"};
-        ListAdapter messageAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, iliasTutorials);
-        ListView myListView = (ListView) myFragmentView.findViewById(R.id.listViewIlias);
-        myListView.setAdapter(messageAdapter);
+        String[] lindaTutorials = {"Prüfungsergebnise einsehen", "Studiumsbescheinigung herunterladen"};
+        ListAdapter messageAdapterIlias = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, iliasTutorials);
+        ListView myListViewIlias = (ListView) myFragmentView.findViewById(R.id.listViewIlias);
+        ListAdapter messageAdapterLinda = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, lindaTutorials);
+        ListView myListViewLinda = (ListView) myFragmentView.findViewById(R.id.listViewLinda);
+        myListViewIlias.setAdapter(messageAdapterIlias);
+        myListViewLinda.setAdapter(messageAdapterLinda);
 
-        myListView.setOnItemClickListener(
+        myListViewIlias.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         auswahl = String.valueOf(parent.getItemAtPosition(position));
-                        Intent intent = new Intent(getActivity(), IliasTutorial1Activity.class);
-                        startActivity(intent);
+                        if(auswahl.equals("Ilias-Kurse beitreten")){
+                            Intent intent = new Intent(getActivity(), IliasTutorial1Activity.class);
+                            startActivity(intent);
+                        }
+                        else if (auswahl.equals("Ilias-Kurse verlassen")){
+                            Intent intent = new Intent(getActivity(), IliasTutorial2Activity.class);
+                            startActivity(intent);
+                        }
+
+                    }
+                }
+        );
+
+        myListViewLinda.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        auswahl = String.valueOf(parent.getItemAtPosition(position));
+                        if(auswahl.equals("Prüfungsergebnise einsehen")){
+                            Intent intent = new Intent(getActivity(), LindaTutorial1Activity.class);
+                            startActivity(intent);
+                        }
+                        else if (auswahl.equals("Studiumsbescheinigung herunterladen")){
+                            Intent intent = new Intent(getActivity(), LindaTutorial2Activity.class);
+                            startActivity(intent);
+                        }
+
                     }
                 }
         );

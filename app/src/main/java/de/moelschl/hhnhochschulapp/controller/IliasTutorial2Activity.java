@@ -1,24 +1,21 @@
 package de.moelschl.hhnhochschulapp.controller;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
-
 import de.moelschl.hhnhochschulapp.R;
 
-public class IliasTutorial1Activity extends AppCompatActivity {
+public class IliasTutorial2Activity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -39,7 +36,7 @@ public class IliasTutorial1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ilias_tutorial1);
-        setTitle("Kurs beitreten Tutorial");
+        setTitle("Kurs verlassen Tutorial");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -110,18 +107,15 @@ public class IliasTutorial1Activity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
 
             if(getArguments().getInt(ARG_SECTION_NUMBER)==1){
-                View rootView = inflater.inflate(R.layout.fragment_ilias_tutorial1_1, container, false);
+                View rootView = inflater.inflate(R.layout.fragment_ilias_tutorial2_1, container, false);
                 return rootView;
             }else if (getArguments().getInt(ARG_SECTION_NUMBER)==2){
 
-                View rootView = inflater.inflate(R.layout.fragment_ilias_tutorial1_2, container, false);
+                View rootView = inflater.inflate(R.layout.fragment_ilias_tutorial2_2, container, false);
                 return rootView;
-            }else if (getArguments().getInt(ARG_SECTION_NUMBER)==3){
 
-                View rootView = inflater.inflate(R.layout.fragment_ilias_tutorial1_3, container, false);
-                return rootView;
             }else{
-                View rootView = inflater.inflate(R.layout.fragment_ilias_tutorial1_1, container, false);
+                View rootView = inflater.inflate(R.layout.fragment_ilias_tutorial2_1, container, false);
                 return rootView;
             }
 
@@ -149,8 +143,8 @@ public class IliasTutorial1Activity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
@@ -160,8 +154,7 @@ public class IliasTutorial1Activity extends AppCompatActivity {
                     return "SECTION 1";
                 case 1:
                     return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
+
             }
             return null;
         }
