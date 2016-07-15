@@ -1,7 +1,5 @@
 package de.moelschl.hhnhochschulapp.model;
 
-import de.moelschl.hhnhochschulapp.controller.LoginActivity;
-
 /**
  * Created by Hasbert on 29.06.2016.
  */
