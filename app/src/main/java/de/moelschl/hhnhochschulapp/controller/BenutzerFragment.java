@@ -9,25 +9,43 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.model.User;
 
 /**
- * Created by moelscmar on 19.05.2016.
+ * generates and shows the user environment
+ *
+ * Created by Hasbert
  */
-public class EinstellungenFragment extends Fragment {
+public class BenutzerFragment extends Fragment {
+
     private OnWindowTitleSet titleSetter;
 
+    /**
+     *
+     * the initialization method is like a constructor. it loads the main layout and set them
+     * active, then gives the information to other classes.
+     *
+     * @param inflater Instantiates a layout XML file into its corresponding View Objects.
+     * @param container Container for View Objects.
+     * @param savedInstanceState a mapping form String values to whatever you want.
+     * @return the showable View.
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_einstellungen, container, false);
-        titleSetter.setWindowTitle("Benutzer Umgebung");
+        View rootView = inflater.inflate(R.layout.benutzer_fragment, container, false);
+        titleSetter.setWindowTitle(User.getUsername());
         return rootView;
     }
 
+    /**
+     * activated if the interface OnWindowTitleSet will be used
+     *
+     * @param context the context of the activity
+     */
 
     @Override
     public void onAttach(Context context) {
-
         super.onAttach(context);
         try {
             titleSetter = (OnWindowTitleSet) context;

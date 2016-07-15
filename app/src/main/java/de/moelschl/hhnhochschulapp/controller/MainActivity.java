@@ -89,6 +89,11 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
+    /**
+     * implements the on back pressed event of the device
+     *
+     */
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -103,12 +108,26 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * sets the showable menu on the left side
+     *
+     * @param menu
+     * @return
+     */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    /**
+     * reacts on the item click event of the menu
+     *
+     * @param item
+     * @return
+     */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,6 +145,12 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    /**
+     * reacts on the click of the toolbar at the bottom of the device screen
+     *
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -155,6 +180,10 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    /**
+     * sets the click event
+     */
 
     private void setAllImageListeners() {
         kalenderImage = (ImageView) findViewById(R.id.Kalender);
@@ -204,35 +233,66 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * initializes the Kalender Fragment
+     */
+
     private void openKalender(){
         KalenderFragment kalenderFragment = new KalenderFragment();
         switchFragment(kalenderFragment);
-        setAppbar();
-        DrawableCompat.setTint(kalenderImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
+        setHintColor(kalenderImage);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_kalender);
     }
 
+    /**
+     * initializes the Home Fragment
+     */
+
     private void openHome(){
         HomeFragment homeFragment = new HomeFragment();
         switchFragment(homeFragment);
-        setAppbar();
-        DrawableCompat.setTint(homeImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
+        setHintColor(homeImage);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_home);
-
-
-
     }
+
+    /**
+     * initializes the Benachrichtgungs Fragment
+     */
 
     private void openBenachrichtigungen(){
         BenachrichtigungenFragment benachrichtigungenFragment = new BenachrichtigungenFragment();
         switchFragment(benachrichtigungenFragment);
-        setAppbar();
-        DrawableCompat.setTint(nachrichtenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
+        setHintColor(nachrichtenImage);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_benachrichtigungen);
     }
+
+    /**
+     * initializes the User Fragment
+     */
+
+    private void openTutorial(){
+        TutorialsFragment tutorialsFragment = new TutorialsFragment();
+        switchFragment(tutorialsFragment);
+    }
+
+    /**
+     * initializes the User Fragment
+     */
+
+    private void openEinstellungen(){
+        BenutzerFragment benutzerFragment = new BenutzerFragment();
+        switchFragment(benutzerFragment);
+        setHintColor(einstellungenImage);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_einstellungen);
+    }
+
+    /**
+     * call the creation methode for the Ilias activity
+     */
 
     private void openIlias(){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW,
@@ -241,14 +301,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void openEinstellungen(){
-        EinstellungenFragment einstellungenFragment = new EinstellungenFragment();
-        switchFragment(einstellungenFragment);
-        setAppbar();
-        DrawableCompat.setTint(einstellungenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setCheckedItem(R.id.nav_einstellungen);
-    }
+
+    /**
+     * call the creation methode for the Linda activity
+     *
+     */
 
     private void openLinda(){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://linda.hs-heilbronn.de/"));
@@ -256,26 +313,21 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void openTutorial(){
-        TutorialsFragment tutorialsFragment = new TutorialsFragment();
-        switchFragment(tutorialsFragment);
-        setAppbar();
 
-
-    }
 
     /**
-     * sets the icons of the app bar
-     *
+     * sets the color of the hints
      */
 
-    private void setAppbar(){
-
+    private void setHintColor(ImageView hint){
         DrawableCompat.setTint(einstellungenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(kalenderImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(homeImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(nachrichtenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(iliasImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
+
+        DrawableCompat.setTint(hint.getDrawable(),
+                ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
     }
 
     //Forum activities will be written here, because we were not able to inheirite a base Toolbar
@@ -317,6 +369,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * sets the window title
+     * @param title of the next window
+     */
 
     @Override
     public void setWindowTitle(String title) {
@@ -324,8 +380,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
+     * load the next fragment of the clicked topic
      *
-     * @param navigationKey
+     * @param navigationKey the clicked topic
      */
 
     @Override
@@ -338,9 +395,10 @@ public class MainActivity extends AppCompatActivity
 
 
     /**
+     * loads the comments fragment of the clicked thread
      *
-     * @param navigationKey
-     * @param question
+     * @param navigationKey the clicked thread
+     * @param question the question to show in comments
      */
 
     @Override
@@ -353,7 +411,7 @@ public class MainActivity extends AppCompatActivity
 
 
     /**
-     *
+     * calls the question adder fragment
      */
 
     @Override
@@ -363,8 +421,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
+     * defines which topics will be shown after clicking the topic textbox to insert text.
      *
-     * @param text
+     * @param text the input text
      */
 
     @Override
@@ -375,7 +434,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     *
+     * stores a new question in the database
      *
      * @param themeTopic
      * @param themeDesc
