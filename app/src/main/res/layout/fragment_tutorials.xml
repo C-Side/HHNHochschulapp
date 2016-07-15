@@ -23,13 +23,22 @@
             android:id="@+id/listViewIlias"
             android:paddingLeft="10dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Linda Tutorials:"
+            android:id="@+id/textView16"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:padding="20dp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewLinda"
+            android:paddingLeft="10dp" />
+
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Tutorials"
-        android:id="@+id/placeholder"
-        android:layout_gravity="center" />
 </FrameLayout>

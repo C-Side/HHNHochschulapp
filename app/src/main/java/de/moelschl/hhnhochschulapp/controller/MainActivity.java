@@ -69,8 +69,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        openHome();
+
         setAllImageListeners();
+        openHome();
         //setAppbar();
     }
 
@@ -229,41 +230,65 @@ public class MainActivity extends AppCompatActivity
         KalenderFragment kalenderFragment = new KalenderFragment();
         switchFragment(kalenderFragment);
         setTitle("Kalender");
+        setAppbar();
+        DrawableCompat.setTint(kalenderImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_kalender);
     }
 
     private void openHome(){
         HomeFragment homeFragment = new HomeFragment();
         switchFragment(homeFragment);
         setTitle("HHN Hochschulapp");
+        setAppbar();
+        DrawableCompat.setTint(homeImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_home);
+
+
+
     }
 
     private void openBenachrichtigungen(){
         BenachrichtigungenFragment benachrichtigungenFragment = new BenachrichtigungenFragment();
         switchFragment(benachrichtigungenFragment);
         setTitle("Benachrichtigungen");
+        setAppbar();
+        DrawableCompat.setTint(nachrichtenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_benachrichtigungen);
     }
 
     private void openIlias(){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("https://ilias.hs-heilbronn.de/login.php?target=&soap_pw=&ext_uid=&cookies=nocookies&client_id=hshn&lang=de"));
         startActivity(browserIntent);
+
     }
 
     private void openEinstellungen(){
         EinstellungenFragment einstellungenFragment = new EinstellungenFragment();
         switchFragment(einstellungenFragment);
         setTitle("Einstellungen");
+        setAppbar();
+        DrawableCompat.setTint(einstellungenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_einstellungen);
     }
 
     private void openLinda(){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://linda.hs-heilbronn.de/"));
         startActivity(browserIntent);
+
     }
 
     private void openTutorial(){
         TutorialsFragment tutorialsFragment = new TutorialsFragment();
         switchFragment(tutorialsFragment);
         setTitle("Tutorial");
+        setAppbar();
+
+
     }
 
     /**
@@ -272,6 +297,7 @@ public class MainActivity extends AppCompatActivity
      */
 
     private void setAppbar(){
+
         DrawableCompat.setTint(einstellungenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(kalenderImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(homeImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
