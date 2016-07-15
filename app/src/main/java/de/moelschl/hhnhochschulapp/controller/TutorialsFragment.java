@@ -1,6 +1,7 @@
 package de.moelschl.hhnhochschulapp.controller;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import de.moelschl.hhnhochschulapp.R;
  */
 public class TutorialsFragment extends Fragment {
 
+    private OnWindowTitleSet titleSetter;
     private View myFragmentView;
     public static String auswahl;
 
@@ -28,6 +30,7 @@ public class TutorialsFragment extends Fragment {
 
         myFragmentView = inflater.inflate(R.layout.fragment_tutorials, container, false);
         initListViewIlias();
+        titleSetter.setWindowTitle("Tutorials");
         return myFragmentView;
     }
 
@@ -78,5 +81,29 @@ public class TutorialsFragment extends Fragment {
                     }
                 }
         );
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+
+        super.onAttach(context);
+        try {
+            titleSetter = (OnWindowTitleSet) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnThreadManage or OnWindowTitleSet");
+        }
+    }
+
+
+    /**
+     * sets variable to default
+     */
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        titleSetter = null;
     }
 }

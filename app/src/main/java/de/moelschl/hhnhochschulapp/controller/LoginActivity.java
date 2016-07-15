@@ -23,8 +23,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText password;
     private DatabaseHelper dbHelper;
 
-    private int passwordTries = 5;
-
 
     /**
      * does what a constructor does. This method called by a new LoginActivity() statement
@@ -107,18 +105,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(passwordTries != 1) {
-            if (authenticate()) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-            else {
-                passwordTries--;
-                Toast.makeText(this, "flasches Password! Noch " + passwordTries + " Versuche!!",
-                        Toast.LENGTH_SHORT).show();
-            }
+        if (authenticate()) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "flasches Password!" ,Toast.LENGTH_SHORT).show();
         }
-        else Toast.makeText(this, "VERKACKT, ALTER!", Toast.LENGTH_LONG).show();
     }
 }

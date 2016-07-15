@@ -40,9 +40,9 @@ import de.moelschl.hhnhochschulapp.tools.CustomAutoCompleteView;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FoThemeFragment.OnThemeSelectedListener,
-        FoThreadFragment.OnThemeSelectedListener, CustomAutoCompleteView.OnThemeChooseListener,
-        FoQuestionAdder.OnStoreData {
+        implements NavigationView.OnNavigationItemSelectedListener, FoThemeFragment.OnThemeManage,
+        FoThreadFragment.OnThreadManage, CustomAutoCompleteView.OnThemeChooseListener,
+        FoQuestionAdder.OnStoreData, OnWindowTitleSet{
 
     private DatabaseHelper mDBHelper;
     private ImageView kalenderImage;
@@ -88,28 +88,6 @@ public class MainActivity extends AppCompatActivity
         ft.addToBackStack("tag");
         ft.commit();
     }
-
-    /**
-     * switches back to the last fragment when the back button is pressed
-     *
-     * this is the method of the old FoActivity
-
-
-    @Override
-    public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 1) {
-            getFragmentManager().popBackStack();
-            popTitleStack();
-        } else {
-            super.onBackPressed();
-        }
-    }
-     */
-
-
-    /**
-     * switches back to the last fragment when the back button is pressed
-     */
 
     @Override
     public void onBackPressed() {
@@ -229,7 +207,6 @@ public class MainActivity extends AppCompatActivity
     private void openKalender(){
         KalenderFragment kalenderFragment = new KalenderFragment();
         switchFragment(kalenderFragment);
-        setTitle("Kalender");
         setAppbar();
         DrawableCompat.setTint(kalenderImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -239,7 +216,6 @@ public class MainActivity extends AppCompatActivity
     private void openHome(){
         HomeFragment homeFragment = new HomeFragment();
         switchFragment(homeFragment);
-        setTitle("HHN Hochschulapp");
         setAppbar();
         DrawableCompat.setTint(homeImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -252,7 +228,6 @@ public class MainActivity extends AppCompatActivity
     private void openBenachrichtigungen(){
         BenachrichtigungenFragment benachrichtigungenFragment = new BenachrichtigungenFragment();
         switchFragment(benachrichtigungenFragment);
-        setTitle("Benachrichtigungen");
         setAppbar();
         DrawableCompat.setTint(nachrichtenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -269,7 +244,6 @@ public class MainActivity extends AppCompatActivity
     private void openEinstellungen(){
         EinstellungenFragment einstellungenFragment = new EinstellungenFragment();
         switchFragment(einstellungenFragment);
-        setTitle("Einstellungen");
         setAppbar();
         DrawableCompat.setTint(einstellungenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -285,7 +259,6 @@ public class MainActivity extends AppCompatActivity
     private void openTutorial(){
         TutorialsFragment tutorialsFragment = new TutorialsFragment();
         switchFragment(tutorialsFragment);
-        setTitle("Tutorial");
         setAppbar();
 
 
@@ -315,29 +288,11 @@ public class MainActivity extends AppCompatActivity
      */
 
     private void openForum(){
-        //vorher --> startActivity(new Intent(MainActivity.this, FoActivity.class));
         initDatabase();
-
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_frame, new FoThemeFragment());
-        ft.addToBackStack("tag");
-        ft.commit();
+        FoThemeFragment themeFragment =  new FoThemeFragment();
+        switchFragment(themeFragment);
     }
 
-    /**
-     * a helper method to replace the current Frgament with a new Fragment.
-     *
-     * @param newFragment the next fragment
-     */
-
-    private void switchForumFragment(Fragment newFragment){
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_frame, newFragment);
-        ft.addToBackStack("tag");
-        ft.commit();
-    }
 
     /**
      * initialize the Database and prints out a text
@@ -363,6 +318,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void setWindowTitle(String title) {
+        setTitle(title);
+    }
 
     /**
      *
@@ -373,7 +332,7 @@ public class MainActivity extends AppCompatActivity
     public void onThemeClicked(String navigationKey) {
         FoThreadFragment threadFragment = new FoThreadFragment();
         threadFragment.setNavigationKey(navigationKey);
-        switchForumFragment(threadFragment);
+        switchFragment(threadFragment);
         //addToTitleStack(firstToUpperCase(navigationKey));
     }
 
@@ -389,8 +348,7 @@ public class MainActivity extends AppCompatActivity
         FoCommentFragment commentFragment = new FoCommentFragment();
         commentFragment.setNavigationKey(navigationKey);
         commentFragment.setQuestion(question, questionHeader);
-        switchForumFragment(commentFragment);
-        //addToTitleStack("Kommentare");
+        switchFragment(commentFragment);
     }
 
 
@@ -401,9 +359,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onNewQuestionClick() {
         FoQuestionAdder questionFragment = new FoQuestionAdder();
-        switchForumFragment(questionFragment);
+        switchFragment(questionFragment);
     }
-
 
     /**
      *
@@ -430,7 +387,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void storeNewQuestion(String themeTopic, String themeDesc, String questionHeader, String question, Context context) {
         mDBHelper.addQuestionToDatabase(themeTopic, themeDesc, questionHeader, question, context);
-        onBackPressed();
+        openForum();
     }
 
 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.controller.OnWindowTitleSet;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 import de.moelschl.hhnhochschulapp.model.CommentListItem;
 import de.moelschl.hhnhochschulapp.tools.CommentAdapter;
@@ -27,6 +28,8 @@ import de.moelschl.hhnhochschulapp.tools.CommentAdapter;
 public class FoCommentFragment extends ListFragment implements View.OnClickListener {
 
     private Context context;
+    private OnWindowTitleSet titleSetter;
+
     private CommentAdapter commentAdapter;
     private DatabaseHelper dbHelper;
     private int navigationKey;
@@ -68,9 +71,7 @@ public class FoCommentFragment extends ListFragment implements View.OnClickListe
         this.dbHelper = new DatabaseHelper(context);
         this.commentAdapter = new CommentAdapter(getActivity(), dbHelper.getCommentList(navigationKey));
         setListAdapter(commentAdapter);
-
-
-
+        titleSetter.setWindowTitle("Kommentare");
 
         return rootView;
     }
@@ -115,11 +116,31 @@ public class FoCommentFragment extends ListFragment implements View.OnClickListe
     }
 
     /**
-    private void getCommentOrDie(){
-        if(dbHelper.getCommentList(navigationKey).isEmpty()){
-            throw noCommentsInListE
-        }
-
-    }
+     * checks that the activity has implemaentated OnThreadManage
+     *
+     * @param context {@link android.content.Context}
      */
+
+    @Override
+    public void onAttach(Context context) {
+
+        super.onAttach(context);
+        try {
+            titleSetter = (OnWindowTitleSet) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnThreadManage or OnWindowTitleSet");
+        }
+    }
+
+
+    /**
+     * sets variable to default
+     */
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        titleSetter = null;
+    }
 }

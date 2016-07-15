@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.controller.OnWindowTitleSet;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 import de.moelschl.hhnhochschulapp.model.ThreadListItem;
 import de.moelschl.hhnhochschulapp.tools.ThreadAdapter;
@@ -23,7 +24,8 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
     private DatabaseHelper dbHelper;
     private String navigationKey;
 
-    private OnThemeSelectedListener listener;
+    private OnWindowTitleSet titleSetter;
+    private OnThreadManage listener;
     private Context context;
 
 
@@ -49,20 +51,33 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
         this.context = getContext();
         this.dbHelper = new DatabaseHelper(context);
         this.threadAdapter = new ThreadAdapter(getActivity(), dbHelper.getThreadList(navigationKey));
+        titleSetter.setWindowTitle(navigationKey.substring(0, 1).toUpperCase() +
+                navigationKey.substring(1));
         setListAdapter(threadAdapter);
 
         return rootView;
     }
 
     /**
+     *
+     * @param key
+     */
+
+    public void setNavigationKey(String key){
+        this.navigationKey = key;
+    }
+
+
+    /**
      * Interface to communicate with the activity
      *
      */
 
-    public interface OnThemeSelectedListener {
+    public interface OnThreadManage {
         void onThreadClicked(int postition, String question, String questionHeader);
         void onNewQuestionClick();
     }
+
 
     /**
      *
@@ -96,7 +111,7 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
 
 
     /**
-     * checks that the activity has implemaentated OnThemeSelectedListener
+     * checks that the activity has implemaentated OnThreadManage
      *
      * @param context {@link android.content.Context}
      */
@@ -106,10 +121,11 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
 
         super.onAttach(context);
         try {
-            listener = (OnThemeSelectedListener) context;
+            listener = (OnThreadManage) context;
+            titleSetter = (OnWindowTitleSet) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
+                    + " must implement OnThreadManage or OnWindowTitleSet");
         }
     }
 
@@ -122,13 +138,6 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
     public void onDetach() {
         super.onDetach();
         listener = null;
-    }
-
-    /**
-     *
-     * @param key
-     */
-    public void setNavigationKey(String key){
-        this.navigationKey = key;
+        titleSetter = null;
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.controller.OnWindowTitleSet;
 import de.moelschl.hhnhochschulapp.model.ThemeListItem;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 import de.moelschl.hhnhochschulapp.tools.ThemeAdapter;
@@ -23,7 +24,9 @@ public class FoThemeFragment extends ListFragment {
 
     private ThemeAdapter themeAdapter;
     private DatabaseHelper dbHelper;
-    private OnThemeSelectedListener listener;
+
+    private OnWindowTitleSet titleSetter;
+    private OnThemeManage listener;
     private Context context;
 
 
@@ -48,6 +51,7 @@ public class FoThemeFragment extends ListFragment {
         this.dbHelper = new DatabaseHelper(context);
         this.themeAdapter = new ThemeAdapter(getActivity(), dbHelper.getThemeList());
         setListAdapter(themeAdapter);
+        titleSetter.setWindowTitle("Forum");
 
         return rootView;
     }
@@ -73,12 +77,12 @@ public class FoThemeFragment extends ListFragment {
      *
      */
 
-    public interface OnThemeSelectedListener {
+    public interface OnThemeManage {
         void onThemeClicked(String navigationKey);
     }
 
     /**
-     * checks that the activity has implemaentated OnThemeSelectedListener
+     * checks that the activity has implemaentated OnThreadManage
      *
      * @param context {@link android.content.Context}
      */
@@ -88,10 +92,11 @@ public class FoThemeFragment extends ListFragment {
 
         super.onAttach(context);
         try {
-            listener = (OnThemeSelectedListener) context;
+            listener = (OnThemeManage) context;
+            titleSetter = (OnWindowTitleSet) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
+                    + " must implement OnThemeManage or OnWindowTitleSet");
         }
     }
 
@@ -103,6 +108,7 @@ public class FoThemeFragment extends ListFragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
+        titleSetter = null;
     }
 }
 

@@ -1,6 +1,7 @@
 package de.moelschl.hhnhochschulapp.controller;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -36,7 +37,9 @@ import de.moelschl.hhnhochschulapp.R;
 public class BenachrichtigungenFragment extends Fragment {
     InputStream is;
     String[] results;
+
     public static String auswahl;
+    private OnWindowTitleSet titleSetter;
 
     private View myFragmentView;
 
@@ -49,6 +52,7 @@ public class BenachrichtigungenFragment extends Fragment {
         myFragmentView = inflater.inflate(R.layout.fragment_benachrichtigungen, container, false);
         getData();
         init();
+        titleSetter.setWindowTitle("Benachrichtigungen");
         return myFragmentView;
     }
 
@@ -105,6 +109,29 @@ public class BenachrichtigungenFragment extends Fragment {
          public static String getAuswahl() {
             return auswahl;
         }
+
+    @Override
+    public void onAttach(Context context) {
+
+        super.onAttach(context);
+        try {
+            titleSetter = (OnWindowTitleSet) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnWindowTitleSet");
+        }
+    }
+
+
+    /**
+     * sets variable to default
+     */
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        titleSetter = null;
+    }
 
     }
 

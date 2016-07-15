@@ -49,6 +49,7 @@ public class FoQuestionAdder extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
         this.context = getContext();
         this.dbHelper = new DatabaseHelper(context);
         this.rootView = inflater.inflate(R.layout.fo_question_adder, container, false);
@@ -113,12 +114,10 @@ public class FoQuestionAdder extends Fragment implements View.OnClickListener{
     }
 
     /**
-     * checks that the activity has implemaentated OnThemeSelectedListener
+     * checks that the activity has implemaentated OnThreadManage
      *
      * @param context {@link android.content.Context}
      */
-
-
 
     @Override
     public void onAttach(Context context) {
