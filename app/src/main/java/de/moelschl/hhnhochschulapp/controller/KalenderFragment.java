@@ -26,6 +26,7 @@ public class KalenderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         CalendarView calendarView;
         final TextView dateView;
+        final TextView datetermin;
 
         View rootView = inflater.inflate(R.layout.fragment_kalender, container, false);
 
@@ -43,7 +44,12 @@ public class KalenderFragment extends Fragment {
               // dateView.setText("Date: " + i2 + " / " + i1 + " / " + i);
 
            // }
+
+        datetermin = (TextView) rootView.findViewById(R.id.date_termin);
+        dateView.setText("Keine Termine");
         });
+
+
         titleSetter.setWindowTitle("Kalender");
         return rootView;
     }
