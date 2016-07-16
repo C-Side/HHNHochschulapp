@@ -1,6 +1,7 @@
 package de.moelschl.hhnhochschulapp.controller;
 
 import android.app.Fragment;
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,16 +31,18 @@ public class KalenderFragment extends Fragment {
 
 
         calendarView = (CalendarView) rootView.findViewById(R.id.calendarView);
+
+
         dateView = (TextView) rootView.findViewById(R.id.date_view);
-        dateView.setText("Date: ");
+        dateView.setText("Keine Termine");
 
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
-                dateView.setText("Date: " + i2 + " / " + i1 + " / " + i);
+        //calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+           // @Override
+            //public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
+              // dateView.setText("Date: " + i2 + " / " + i1 + " / " + i);
 
-            }
+           // }
         });
         titleSetter.setWindowTitle("Kalender");
         return rootView;
