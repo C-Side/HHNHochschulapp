@@ -29,8 +29,11 @@ import de.moelschl.hhnhochschulapp.controller.Forum.FoCommentFragment;
 import de.moelschl.hhnhochschulapp.controller.Forum.FoQuestionAdder;
 import de.moelschl.hhnhochschulapp.controller.Forum.FoThemeFragment;
 import de.moelschl.hhnhochschulapp.controller.Forum.FoThreadFragment;
+import de.moelschl.hhnhochschulapp.controller.User.BenutzerFragment;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
+import de.moelschl.hhnhochschulapp.model.User;
 import de.moelschl.hhnhochschulapp.tools.CustomAutoCompleteView;
+import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 
 /**
  * the activity which holds the navigation-sets like appbar and toolbar and controls the action
@@ -42,8 +45,9 @@ import de.moelschl.hhnhochschulapp.tools.CustomAutoCompleteView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FoThemeFragment.OnThemeManage,
         FoThreadFragment.OnThreadManage, CustomAutoCompleteView.OnThemeChooseListener,
-        FoQuestionAdder.OnStoreData, OnWindowTitleSet{
+        FoQuestionAdder.OnStoreData, OnWindowTitleSet, BenutzerFragment.OnUserManage {
 
+    private static Context context;
     private DatabaseHelper mDBHelper;
     private ImageView kalenderImage;
     private ImageView einstellungenImage;
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -69,10 +74,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        initDatabase();
         setAllImageListeners();
         openHome();
-        //setAppbar();
+    }
+
+    public static Context getAppContext(){
+        return MainActivity.context;
     }
 
     /**
@@ -340,7 +348,6 @@ public class MainActivity extends AppCompatActivity
      */
 
     private void openForum(){
-        initDatabase();
         FoThemeFragment themeFragment =  new FoThemeFragment();
         switchFragment(themeFragment);
     }
@@ -389,6 +396,7 @@ public class MainActivity extends AppCompatActivity
     public void onThemeClicked(String navigationKey) {
         FoThreadFragment threadFragment = new FoThreadFragment();
         threadFragment.setNavigationKey(navigationKey);
+        threadFragment.setList(mDBHelper.getThreadListByTheme(navigationKey));
         switchFragment(threadFragment);
         //addToTitleStack(firstToUpperCase(navigationKey));
     }
@@ -449,5 +457,26 @@ public class MainActivity extends AppCompatActivity
         openForum();
     }
 
+    /**
+     * sets the list of the list for the adapter
+     *
+     * @param position
+     */
 
+    @Override
+    public void setUserListEvent(int position) {
+        if (position == 0) {
+            FoThreadFragment threadFragment = new FoThreadFragment();
+            threadFragment.setNavigationKey("deine Beiträge");
+            threadFragment.setList(mDBHelper.getThreadListByUsername(User.getUsername()));
+            switchFragment(threadFragment);
+        }
+        /**
+        else {
+            FoCommentFragment commentFragment = new FoCommentFragment();
+            commentFragment.setCommentList(mDBHelper.getCommentListByUsername(User.getUsername()));
+
+        }
+         */
+    }
 }

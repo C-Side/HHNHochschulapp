@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.controller.OnWindowTitleSet;
+import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 import de.moelschl.hhnhochschulapp.model.ThreadListItem;
 import de.moelschl.hhnhochschulapp.tools.ThreadAdapter;
@@ -50,12 +52,21 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
 
         this.context = getContext();
         this.dbHelper = new DatabaseHelper(context);
-        this.threadAdapter = new ThreadAdapter(getActivity(), dbHelper.getThreadList(navigationKey));
         titleSetter.setWindowTitle(navigationKey.substring(0, 1).toUpperCase() +
                 navigationKey.substring(1));
         setListAdapter(threadAdapter);
 
         return rootView;
+    }
+
+    /**
+     * sets the list which will be shown
+     *
+     * @param workingList the list of the shown
+     */
+
+    public void setList(ArrayList<ThreadListItem> workingList){
+        this.threadAdapter = new ThreadAdapter(getActivity(),workingList);
     }
 
     /**

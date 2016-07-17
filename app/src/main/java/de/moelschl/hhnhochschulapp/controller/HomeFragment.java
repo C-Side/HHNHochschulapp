@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 
 /**
  * Created by moelscmar on 19.05.2016.

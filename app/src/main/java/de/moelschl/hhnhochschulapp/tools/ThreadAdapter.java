@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.controller.MainActivity;
 import de.moelschl.hhnhochschulapp.model.ThreadListItem;
 
 /**
@@ -81,7 +82,7 @@ public class ThreadAdapter extends BaseAdapter{
 
         InfoViewHolder infoViewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(
+            convertView = LayoutInflater.from(MainActivity.getAppContext()).inflate(
                     R.layout.fo_threads_row_layout, parent, false);
             infoViewHolder = new InfoViewHolder(convertView);
             convertView.setTag(infoViewHolder);

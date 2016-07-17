@@ -1,4 +1,4 @@
-package de.moelschl.hhnhochschulapp.controller;
+package de.moelschl.hhnhochschulapp.tools;
 
 /**
  * Created by Hasbert on 15.07.2016.
