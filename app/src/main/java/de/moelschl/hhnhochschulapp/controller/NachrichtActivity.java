@@ -23,6 +23,11 @@ import java.util.regex.Pattern;
 import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.controller.BenachrichtigungenFragment;
 
+/**
+ * Class to load, control and display a single message
+ *
+ *  * Created by moelscmar
+ */
 public class NachrichtActivity extends AppCompatActivity {
     InputStream is;
     String[] results;
@@ -32,6 +37,13 @@ public class NachrichtActivity extends AppCompatActivity {
     String absender;
     String nachricht;
 
+    /**
+     *
+     * the initialization method is like a constructor. it loads the main layout and set them
+     * active, then gives the information to other classes.
+     *
+     * @param savedInstanceState a mapping form String values to whatever you want.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +55,9 @@ public class NachrichtActivity extends AppCompatActivity {
         trimString();
     }
 
+    /**
+     * loads a single message from a php file and shows it in the ListAdapter
+     */
     private void getData(){
         String result = "";
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -80,6 +95,10 @@ public class NachrichtActivity extends AppCompatActivity {
         Log.e("EndAuswahl", auswahl);
 
     }
+
+    /**
+     * Method to trim the String from the php file into a desired format
+     */
     private void trimString(){
         auswahl.replace("<br>", "");
         results = auswahl.split(Pattern.quote(":"));

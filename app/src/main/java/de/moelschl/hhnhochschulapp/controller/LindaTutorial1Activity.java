@@ -15,6 +15,11 @@ import android.view.ViewGroup;
 
 import de.moelschl.hhnhochschulapp.R;
 
+/**
+ * Class to control and Display the first Linda Tutorial
+ *
+ * Created by moelscmar
+ */
 public class LindaTutorial1Activity extends AppCompatActivity {
 
     /**
@@ -32,6 +37,14 @@ public class LindaTutorial1Activity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    /**
+     *
+     * the initialization method is like a constructor. it loads the main layout and set them
+     * active, then gives the information to other classes.
+     *
+     * @param savedInstanceState a mapping form String values to whatever you want.
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
