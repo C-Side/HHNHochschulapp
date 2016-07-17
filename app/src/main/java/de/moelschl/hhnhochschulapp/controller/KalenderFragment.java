@@ -38,17 +38,19 @@ public class KalenderFragment extends Fragment {
         dateView.setText("Keine Termine");
 
 
-        //calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-           // @Override
-            //public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
-              // dateView.setText("Date: " + i2 + " / " + i1 + " / " + i);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
+               dateView.setText("Date: " + i2 + "." + i1 + "." + i);
 
-           // }
+            }
 
-        datetermin = (TextView) rootView.findViewById(R.id.date_termin);
-        dateView.setText("Keine Termine");
+            if(dateView.equals("6.6.2016")){
+                dateView.setText("Interface Projects");
+                dateView.setText("A212");
+                dateView.setText("8:00 - 9:30");
+            }
         });
-
 
         titleSetter.setWindowTitle("Kalender");
         return rootView;
@@ -77,4 +79,6 @@ public class KalenderFragment extends Fragment {
         super.onDetach();
         titleSetter = null;
     }
+
+
 }
