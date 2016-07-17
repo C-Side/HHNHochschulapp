@@ -71,7 +71,7 @@ public class BenutzerFragment extends Fragment{
     private ArrayList<String> getForumNavItems(){
         ArrayList<String> list = new ArrayList<>();
         list.add("gestellte Fragen");
-        list.add("geschriebene Kommentare");
+        list.add("mit hilfreich bewertete Kommentare");
         return list;
     }
 

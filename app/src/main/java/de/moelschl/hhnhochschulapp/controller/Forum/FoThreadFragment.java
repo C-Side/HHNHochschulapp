@@ -4,6 +4,8 @@ import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import de.moelschl.hhnhochschulapp.tools.ThreadAdapter;
  * Created by Hasbert on 24.06.2016.
  */
 public class FoThreadFragment extends ListFragment implements View.OnClickListener{
+
     private ThreadAdapter threadAdapter;
     private DatabaseHelper dbHelper;
     private String navigationKey;
@@ -46,19 +49,17 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.context = getContext();
+        listener.changeToForumLayout();
         View rootView = inflater.inflate(R.layout.fo_threads_fragment, container, false);
 
-        Button newQuestion = (Button) rootView.findViewById(R.id.new_question_button);
-        newQuestion.setOnClickListener(this);
-
-        this.context = getContext();
         this.dbHelper = new DatabaseHelper(context);
         this.threadAdapter = new ThreadAdapter(getActivity(), workingList);
-        //threadAdapter.changeList(workingList);
         setListAdapter(threadAdapter);
 
         titleSetter.setWindowTitle(navigationKey.substring(0, 1).toUpperCase() +
                 navigationKey.substring(1));
+
         return rootView;
     }
 
@@ -73,7 +74,7 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
     }
 
     /**
-     *
+     * sets the navigation key
      * @param key
      */
 
@@ -90,6 +91,7 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
     public interface OnThreadManage {
         void onThreadClicked(int postition, String question, String questionHeader);
         void onNewQuestionClick();
+        void changeToForumLayout();
     }
 
 

@@ -32,8 +32,9 @@
             android:title="Tutorials" />
         <item
             android:id="@+id/nav_einstellungen"
-            android:icon="@drawable/ic_einstellungen"
-            android:title="Einstellungen" />
+            android:icon="@drawable/blue_user_icon"
+            android:tint="@color/black"
+            android:title="Benutzer" />
     </group>
 
 

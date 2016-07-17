@@ -28,6 +28,8 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/therealy_appbar"
+            android:visibility="gone"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -152,7 +154,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/einstellungen"
-                    android:src="@drawable/ic_einstellungen"
+                    android:src="@drawable/blue_user_icon"
                     android:layout_alignBottom="@+id/content_frame"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
@@ -164,7 +166,7 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Optionen"
+                    android:text="Profil"
                     android:id="@+id/einstellungentext"
                     android:textAlignment="center"
                     android:textSize="12dp"

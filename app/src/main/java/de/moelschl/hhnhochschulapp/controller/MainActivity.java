@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -47,9 +49,11 @@ public class MainActivity extends AppCompatActivity
         FoThreadFragment.OnThreadManage, CustomAutoCompleteView.OnThemeChooseListener,
         FoQuestionAdder.OnStoreData, OnWindowTitleSet, BenutzerFragment.OnUserManage {
 
+    private LinearLayout appbar;
+    private FloatingActionButton fab;
     private DatabaseHelper mDBHelper;
     private ImageView kalenderImage;
-    private ImageView einstellungenImage;
+    private ImageView benutzerImage;
     private ImageView homeImage;
     private ImageView nachrichtenImage;
     private ImageView iliasImage;
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        setFAB();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -72,10 +76,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        this.appbar=(LinearLayout)this.findViewById(R.id.therealy_appbar);
+        appbar.setVisibility(View.VISIBLE);
+
         initDatabase();
         setAllImageListeners();
         openHome();
     }
+
 
     /**
      * switches the Fragment
@@ -84,6 +92,8 @@ public class MainActivity extends AppCompatActivity
      */
 
     private void switchFragment(Fragment newFragment){
+        fab.setVisibility(View.GONE);
+        appbar.setVisibility(View.VISIBLE);
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.content_frame, newFragment);
@@ -98,6 +108,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        fab.setVisibility(View.GONE);
+        appbar.setVisibility(View.VISIBLE);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -190,7 +202,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setAllImageListeners() {
         kalenderImage = (ImageView) findViewById(R.id.Kalender);
-        einstellungenImage = (ImageView) findViewById(R.id.einstellungen);
+        benutzerImage = (ImageView) findViewById(R.id.einstellungen);
         homeImage = (ImageView) findViewById(R.id.Home);
         nachrichtenImage = (ImageView) findViewById(R.id.Benachrichtigungen);
         iliasImage = (ImageView) findViewById(R.id.ilias);
@@ -227,7 +239,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        einstellungenImage.setOnClickListener(new View.OnClickListener() {
+        benutzerImage.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -288,7 +300,7 @@ public class MainActivity extends AppCompatActivity
     private void openEinstellungen(){
         BenutzerFragment benutzerFragment = new BenutzerFragment();
         switchFragment(benutzerFragment);
-        setHintColor(einstellungenImage);
+        setHintColor(benutzerImage);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_einstellungen);
     }
@@ -323,14 +335,14 @@ public class MainActivity extends AppCompatActivity
      */
 
     private void setHintColor(ImageView hint){
-        DrawableCompat.setTint(einstellungenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
+        DrawableCompat.setTint(benutzerImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(kalenderImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(homeImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(nachrichtenImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
         DrawableCompat.setTint(iliasImage.getDrawable(), ContextCompat.getColor(getApplicationContext(), R.color.black));
 
         DrawableCompat.setTint(hint.getDrawable(),
-                ContextCompat.getColor(getApplicationContext(), R.color.fancyBlue));
+                ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
     }
 
     //Forum activities will be written here, because we were not able to inheirite a base Toolbar
@@ -343,8 +355,36 @@ public class MainActivity extends AppCompatActivity
      */
 
     private void openForum(){
+       // changeLayou();
         FoThemeFragment themeFragment =  new FoThemeFragment();
         switchFragment(themeFragment);
+    }
+
+    /**
+     * set a the floating action button
+     *
+     */
+
+    private void setFAB(){
+        this.fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        fab.setVisibility(View.GONE);
+    }
+
+    /**
+     * changes the layout of the overlaying activity
+     *
+     */
+
+    @Override
+    public void changeToForumLayout(){
+        fab.setVisibility(View.VISIBLE);
+        appbar.setVisibility(View.GONE);
     }
 
 
@@ -393,7 +433,6 @@ public class MainActivity extends AppCompatActivity
         threadFragment.setNavigationKey(navigationKey);
         threadFragment.setList(mDBHelper.getThreadListByTheme(navigationKey));
         switchFragment(threadFragment);
-        //addToTitleStack(firstToUpperCase(navigationKey));
     }
 
 
