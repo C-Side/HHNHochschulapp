@@ -16,9 +16,14 @@ import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 
 /**
  * Created by ahenning on 31.05.2016.
+ * inserts data into the calendar view
  */
 public class KalenderFragment extends Fragment {
     private OnWindowTitleSet titleSetter;
+
+    /**
+     * sets the dateview and a fix entry in the calendar
+     */
 
     @Nullable
     @Override
