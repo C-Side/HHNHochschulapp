@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.controller.OnWindowTitleSet;
+import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 import de.moelschl.hhnhochschulapp.tools.CommentAdapter;
 
