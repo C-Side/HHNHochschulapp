@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity
         FoThreadFragment.OnThreadManage, CustomAutoCompleteView.OnThemeChooseListener,
         FoQuestionAdder.OnStoreData, OnWindowTitleSet, BenutzerFragment.OnUserManage {
 
-    private static Context context;
     private DatabaseHelper mDBHelper;
     private ImageView kalenderImage;
     private ImageView einstellungenImage;
@@ -58,7 +57,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MainActivity.context = getApplicationContext();
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,10 +75,6 @@ public class MainActivity extends AppCompatActivity
         initDatabase();
         setAllImageListeners();
         openHome();
-    }
-
-    public static Context getAppContext(){
-        return MainActivity.context;
     }
 
     /**

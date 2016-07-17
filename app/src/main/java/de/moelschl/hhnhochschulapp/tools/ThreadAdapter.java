@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.controller.MainActivity;
 import de.moelschl.hhnhochschulapp.model.ThreadListItem;
 
 /**
@@ -19,7 +18,7 @@ import de.moelschl.hhnhochschulapp.model.ThreadListItem;
  */
 public class ThreadAdapter extends BaseAdapter{
 
-    private ArrayList<ThreadListItem> workingList;
+    private static ArrayList<ThreadListItem> workingList;
     private Context context;
 
 
@@ -30,7 +29,7 @@ public class ThreadAdapter extends BaseAdapter{
      * @param listItem the first shown list of the Forum.
      */
     public ThreadAdapter(Context context, ArrayList<ThreadListItem> listItem) {
-        this.workingList = listItem;
+        changeList(listItem);
         this.context = context;
     }
 
@@ -82,7 +81,7 @@ public class ThreadAdapter extends BaseAdapter{
 
         InfoViewHolder infoViewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(MainActivity.getAppContext()).inflate(
+            convertView = LayoutInflater.from(context).inflate(
                     R.layout.fo_threads_row_layout, parent, false);
             infoViewHolder = new InfoViewHolder(convertView);
             convertView.setTag(infoViewHolder);
@@ -98,6 +97,11 @@ public class ThreadAdapter extends BaseAdapter{
         infoViewHolder.commentCount.setText(String.valueOf(listItem.getCommentCount()));
 
         return convertView;
+    }
+
+    public void changeList(ArrayList<ThreadListItem> itemsList){
+        workingList = itemsList;
+        notifyDataSetChanged();
     }
 
 

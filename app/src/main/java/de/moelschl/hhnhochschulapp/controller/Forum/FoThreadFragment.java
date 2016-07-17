@@ -25,6 +25,7 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
     private ThreadAdapter threadAdapter;
     private DatabaseHelper dbHelper;
     private String navigationKey;
+    private ArrayList<ThreadListItem> workingList;
 
     private OnWindowTitleSet titleSetter;
     private OnThreadManage listener;
@@ -52,10 +53,12 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
 
         this.context = getContext();
         this.dbHelper = new DatabaseHelper(context);
-        titleSetter.setWindowTitle(navigationKey.substring(0, 1).toUpperCase() +
-                navigationKey.substring(1));
+        this.threadAdapter = new ThreadAdapter(getActivity(), workingList);
+        //threadAdapter.changeList(workingList);
         setListAdapter(threadAdapter);
 
+        titleSetter.setWindowTitle(navigationKey.substring(0, 1).toUpperCase() +
+                navigationKey.substring(1));
         return rootView;
     }
 
@@ -66,7 +69,7 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
      */
 
     public void setList(ArrayList<ThreadListItem> workingList){
-        this.threadAdapter = new ThreadAdapter(getActivity(),workingList);
+            this.workingList = workingList;
     }
 
     /**
