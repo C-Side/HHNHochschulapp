@@ -16,9 +16,14 @@ import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 
 /**
  * Created by ahenning on 31.05.2016.
+ * inserts data into the calendar view
  */
 public class KalenderFragment extends Fragment {
     private OnWindowTitleSet titleSetter;
+
+    /**
+     * sets the dateview and a fix entry in the calendar
+     */
 
     @Nullable
     @Override
@@ -41,7 +46,7 @@ public class KalenderFragment extends Fragment {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
                dateView.setText("Date: " + i2 + "." + i1 + "." + i);
-                if(dateView.getText().equals("Date: 6.6.2016")){
+                if(dateView.getText().equals("Date: 18.6.2016")){
                     dateView.setText("Interface Projects\nA212\n8:00 - 9:30");
 
                 }

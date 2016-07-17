@@ -33,17 +33,29 @@ import de.moelschl.hhnhochschulapp.R;
 import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 
 /**
- * Created by moelscmar on 19.05.2016.
+ * Class that loads, displays and is controlling the message System
+ *
+ * Created by moelscmar
  */
 public class BenachrichtigungenFragment extends Fragment {
-    InputStream is;
-    String[] results;
 
     public static String auswahl;
+    private InputStream is;
+    private String[] results;
     private OnWindowTitleSet titleSetter;
-
     private View myFragmentView;
 
+
+    /**
+     *
+     * the initialization method is like a constructor. it loads the main layout and set them
+     * active, then gives the information to other classes.
+     *
+     * @param inflater Instantiates a layout XML file into its corresponding View Objects.
+     * @param container Container for View Objects.
+     * @param savedInstanceState a mapping form String values to whatever you want.
+     * @return the showable View.
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +69,10 @@ public class BenachrichtigungenFragment extends Fragment {
         return myFragmentView;
     }
 
+
+    /**
+     * initiates the ListAdapter and the Listener
+     */
     private void init() {
         ListAdapter messageAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, results);
         ListView myListView = (ListView) myFragmentView.findViewById(R.id.listView1);
@@ -75,6 +91,9 @@ public class BenachrichtigungenFragment extends Fragment {
         );
     }
 
+    /**
+     * loads the messages from a php file and shows it in the ListAdapter
+     */
     private void getData() {
         String result = "";
         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -111,6 +130,7 @@ public class BenachrichtigungenFragment extends Fragment {
             return auswahl;
         }
 
+
     @Override
     public void onAttach(Context context) {
 
@@ -127,7 +147,6 @@ public class BenachrichtigungenFragment extends Fragment {
     /**
      * sets variable to default
      */
-
     @Override
     public void onDetach() {
         super.onDetach();
