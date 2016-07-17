@@ -5,15 +5,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 
 /**
  * Created by ahenning on 31.05.2016.

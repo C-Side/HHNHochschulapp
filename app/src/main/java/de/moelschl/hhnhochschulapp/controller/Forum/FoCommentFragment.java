@@ -11,12 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.controller.OnWindowTitleSet;
+import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
-import de.moelschl.hhnhochschulapp.model.CommentListItem;
 import de.moelschl.hhnhochschulapp.tools.CommentAdapter;
 
 

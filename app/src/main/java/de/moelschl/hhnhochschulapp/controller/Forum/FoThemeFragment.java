@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import de.moelschl.hhnhochschulapp.R;
-import de.moelschl.hhnhochschulapp.controller.OnWindowTitleSet;
+import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 import de.moelschl.hhnhochschulapp.model.ThemeListItem;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 import de.moelschl.hhnhochschulapp.tools.ThemeAdapter;

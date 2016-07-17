@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 
 /**
  * Class that loads, displays and is controlling the message System

@@ -129,7 +129,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mList;
     }
 
-    public ArrayList<ThreadListItem> getThreadList(String navigationKEy){
+    /**
+     * a getter for the threads list by a cliocked theme for the threadslist of the forum.
+     * It holds the information of the list.
+     *
+     * @param navigationKEy the key theme
+     * @return the created list of the database
+     */
+
+    public ArrayList<ThreadListItem> getThreadListByTheme(String navigationKEy){
+        final String QUERY = "SELECT * " +
+                             "FROM thread " +
+                             "WHERE thread.theme_topic = '" + navigationKEy + "'";
+        ArrayList<ThreadListItem> threadsList = createThreadList(QUERY);
+        return threadsList;
+    }
+
+    /**
+     * a getter for the threads list by userName for the threadslist of the forum.
+     * It holds the information of the list.
+     *
+     * @param userName the logged in uername
+     * @return the created list of the database
+     */
+
+    public ArrayList<ThreadListItem> getThreadListByUsername(String userName){
+        final String QUERY = "SELECT * " +
+                "FROM thread " +
+                "WHERE user_nickname = '" + userName + "'";
+        ArrayList<ThreadListItem> threadsList = createThreadList(QUERY);
+        return threadsList;
+    }
+
+
+    /**
+     * creates a list of Items to show in the forum GUI. the querry have to aim for a solution-form
+     * of ID, theme_topic, questionHeader, questionText, user_nickname
+     *
+     * @param QUERY the query to get the list items
+     * @return the accessable List of Listitems
+     */
+
+    private ArrayList<ThreadListItem> createThreadList(final String QUERY){
         ThreadListItem listItem = null;
         ArrayList<ThreadListItem> threadList = new ArrayList<>();
         int commentCount = 0;
@@ -138,10 +179,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         openDatabase();
 
         HashMap<Integer, Integer> comCount = getCount(mDatabase);
-        final String QUERY =
-                "SELECT * " +
-                        "FROM thread " +
-                        "WHERE thread.theme_topic = '" + navigationKEy + "'";
 
         //create a cursor who inspects a single row
         Cursor cursor = mDatabase.rawQuery(QUERY, null);
@@ -169,7 +206,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private HashMap getCount(SQLiteDatabase mDatabase){
-
         HashMap<Integer, Integer> hash = new HashMap<>();
         final String COUNT_QUERY = " SELECT thread.id, COUNT (comments.answer_text)\n" +
                 " FROM thread JOIN comments ON thread.id = comments.thread_id\n" +
@@ -225,6 +261,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return description;
     }
 
+
+    /**
+     * getter for the password by username
+     *
+     * @param username the username
+     * @return the password
+     */
+
     public String getPasswordByUsername(String username){
         openDatabase();
         String password = null;
@@ -270,6 +314,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
         closeDatabase();
     }
+
+    /**
+     * checks the topic. if its not inside the actual list of topics then the method returns false
+     *
+     * @param key the searching key
+     * @return true the key is in the list
+     */
 
     private boolean isNotInList(String key) {
         boolean inList = true;

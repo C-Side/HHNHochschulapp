@@ -14,6 +14,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 
 /**
  * Class to display and control an overview of the Tutorials to select one
