@@ -35,7 +35,7 @@ public class KalenderFragment extends Fragment {
 
 
         dateView = (TextView) rootView.findViewById(R.id.date_view);
-        dateView.setText("Keine Termine");
+        dateView.setText("Date:");
 
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
