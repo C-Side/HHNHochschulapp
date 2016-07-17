@@ -16,7 +16,9 @@ import android.widget.ListView;
 import de.moelschl.hhnhochschulapp.R;
 
 /**
- * Created by moelscmar on 19.05.2016.
+ * Class to display and control an overview of the Tutorials to select one
+ *
+ * Created by moelscmar.
  */
 public class TutorialsFragment extends Fragment {
 
@@ -24,6 +26,18 @@ public class TutorialsFragment extends Fragment {
     private View myFragmentView;
     public static String auswahl;
 
+
+
+    /**
+     *
+     * the initialization method is like a constructor. it loads the main layout and set them
+     * active, then gives the information to other classes.
+     *
+     * @param inflater Instantiates a layout XML file into its corresponding View Objects.
+     * @param container Container for View Objects.
+     * @param savedInstanceState a mapping form String values to whatever you want.
+     * @return the showable View.
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +48,9 @@ public class TutorialsFragment extends Fragment {
         return myFragmentView;
     }
 
+    /**
+     * initiates the ListAdapters and the Listeners
+     */
     private void initListViewIlias() {
         String[] iliasTutorials = {"Ilias-Kurse beitreten", "Ilias-Kurse verlassen"};
         String[] lindaTutorials = {"Prüfungsergebnise einsehen", "Studiumsbescheinigung herunterladen"};
