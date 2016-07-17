@@ -42,14 +42,14 @@ public class KalenderFragment extends Fragment {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
                dateView.setText("Date: " + i2 + "." + i1 + "." + i);
+                if(dateView.getText().equals("Date: 6.6.2016")){
+                    dateView.setText("Interface Projects\nA212\n8:00 - 9:30");
+
+                }
 
             }
 
-            if(dateView.equals("6.6.2016")){
-                dateView.setText("Interface Projects");
-                dateView.setText("A212");
-                dateView.setText("8:00 - 9:30");
-            }
+
         });
 
         titleSetter.setWindowTitle("Kalender");
