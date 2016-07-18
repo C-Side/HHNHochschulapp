@@ -7,6 +7,7 @@ public class CommentListItem {
 
     private String answerText;
     private String userNickname;
+    private int id;
 
     /**
      * constructor to initialize a Object
@@ -14,9 +15,10 @@ public class CommentListItem {
      * @param answerText the answer text to the given question
      * @param userNickname the users nickname
      */
-    public CommentListItem(String answerText, String userNickname){
+    public CommentListItem(String answerText, String userNickname, int id){
         this.answerText = answerText;
         this.userNickname = userNickname;
+        this.id = id;
     }
 
     /**
@@ -36,5 +38,14 @@ public class CommentListItem {
 
     public String getUserNickname() {
         return userNickname;
+    }
+
+    /**
+     * getter for the comments id
+     * @return the comments id
+     */
+
+    public int getId() {
+        return id;
     }
 }

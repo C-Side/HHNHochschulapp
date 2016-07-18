@@ -129,6 +129,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mList;
     }
 
+    public boolean userHasClicked(int clickedItemId){
+        boolean hasClicked = false;
+        openDatabase();
+
+        final String QUERY = "SELECT *" +
+                "FROM rating" +
+                "WHERE rating.rater = " + "'" + User.getUsername() + "'" +
+                "AND rating.id = " + "'" + clickedItemId + "'";
+        //create a cursor who inspects a single row
+        Cursor cursor = mDatabase.rawQuery(QUERY, null);
+        if (cursor != null){
+            hasClicked = false;
+            }
+        else hasClicked = true;
+
+        cursor.close();
+        closeDatabase();
+
+        return hasClicked;
+    }
+
     /**
      * a getter for the threads list by a cliocked theme for the threadslist of the forum.
      * It holds the information of the list.
@@ -234,7 +255,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()){
             String answerText = cursor.getString(1);
             String userNickname = cursor.getString(2);
-            listItem = new CommentListItem(answerText, userNickname);
+            int id = cursor.getInt(3);
+            listItem = new CommentListItem(answerText, userNickname, id);
             mList.add(listItem);
             cursor.moveToNext();
         }

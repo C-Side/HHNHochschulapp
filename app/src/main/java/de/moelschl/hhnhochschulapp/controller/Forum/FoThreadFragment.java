@@ -23,7 +23,7 @@ import de.moelschl.hhnhochschulapp.tools.ThreadAdapter;
 /**
  * Created by Hasbert on 24.06.2016.
  */
-public class FoThreadFragment extends ListFragment implements View.OnClickListener{
+public class FoThreadFragment extends ListFragment{
 
     private ThreadAdapter threadAdapter;
     private DatabaseHelper dbHelper;
@@ -90,19 +90,7 @@ public class FoThreadFragment extends ListFragment implements View.OnClickListen
 
     public interface OnThreadManage {
         void onThreadClicked(int postition, String question, String questionHeader);
-        void onNewQuestionClick();
         void changeToForumLayout();
-    }
-
-
-    /**
-     *
-     * @param v
-     */
-
-    @Override
-    public void onClick(View v) {
-        listener.onNewQuestionClick();
     }
 
 

@@ -7,11 +7,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import de.moelschl.hhnhochschulapp.R;
+import de.moelschl.hhnhochschulapp.model.ThreadListItem;
 import de.moelschl.hhnhochschulapp.tools.OnWindowTitleSet;
 import de.moelschl.hhnhochschulapp.io.DatabaseHelper;
 import de.moelschl.hhnhochschulapp.tools.CommentAdapter;
@@ -94,6 +97,20 @@ public class FoCommentFragment extends ListFragment implements View.OnClickListe
 
         this.questionHeader = questionHeader;
         this.questionText = question;
+    }
+
+    /**
+     * calles the inner class method onThemeClicked and gives the activity the full control
+     *
+     * @param l {@link android.widget.ListView}
+     * @param v {@link android.view.View}
+     * @param position the position in the list
+     * @param id serializable number
+     */
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
     }
 
 

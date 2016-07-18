@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity
 
         this.appbar=(LinearLayout)this.findViewById(R.id.therealy_appbar);
         appbar.setVisibility(View.VISIBLE);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         initDatabase();
         setAllImageListeners();
@@ -370,7 +373,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FoQuestionAdder questionFragment = new FoQuestionAdder();
+                switchFragment(questionFragment);
             }
         });
         fab.setVisibility(View.GONE);
@@ -447,19 +451,8 @@ public class MainActivity extends AppCompatActivity
     public void onThreadClicked(int navigationKey, String question, String questionHeader) {
         FoCommentFragment commentFragment = new FoCommentFragment();
         commentFragment.setNavigationKey(navigationKey);
-        commentFragment.setQuestion(question, questionHeader);
+        commentFragment.setQuestion(questionHeader, question);
         switchFragment(commentFragment);
-    }
-
-
-    /**
-     * calls the question adder fragment
-     */
-
-    @Override
-    public void onNewQuestionClick() {
-        FoQuestionAdder questionFragment = new FoQuestionAdder();
-        switchFragment(questionFragment);
     }
 
     /**
